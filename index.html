@@ -49,6 +49,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 .mfb a{display:inline-block;padding:12px 28px;border-radius:8px;background:#e60012;color:#fff;text-decoration:none;font-weight:700;font-size:14px;margin-top:16px}
 .fn{padding:12px;text-align:center;font-size:10px;color:#aaa}
 .ag-sec{display:block}
+/* 待ち時間 */
+.wt-bar{background:#fff;padding:5px 12px;font-size:10px;color:#888;border-bottom:1px solid #eee;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.wt-bar .dot{width:7px;height:7px;border-radius:50%;background:#00a960;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.tb .wt{width:52px;padding:4px 2px;font-size:10px}
+.wt-b{display:inline-block;padding:2px 6px;border-radius:8px;font-size:9px;font-weight:700;white-space:nowrap}
+.wt-g{background:#e6f9ee;color:#00884b}
+.wt-y{background:#fff7dd;color:#a16800}
+.wt-r{background:#ffe5e5;color:#c00}
+.wt-x{background:#f0f0f0;color:#aaa}
+.wt-ld{background:#f5f5f5;color:#ccc}
 @media(min-width:768px){body{max-width:480px;margin:0 auto}.bn{max-width:480px}}
 </style>
 </head>
@@ -80,9 +91,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <b style="color:#e60012">★</b> 条件付
 </div>
 
+<div class="wt-bar" id="wtBar1">
+  <div class="dot"></div>
+  <span id="wtText1">待ち時間を取得中...</span>
+</div>
+
 <div class="scroll-area">
 
-<!-- ─── A：8人全員で乗れる ─── -->
+<!-- ─── A ─── -->
 <div class="pat" data-pat="A">
 <div class="ph">
   <div class="ph-t">パターンA：全員一緒に楽しめる（15件）</div>
@@ -93,29 +109,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   </div>
 </div>
 <table class="tb">
-<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
+<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
 <tbody>
-<tr><td class="n">コチラドライビングスクール<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">チクタクトレイン<small>プッチタウン</small></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">テストフライト<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパワーショベル<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
-<tr><td class="n">ルンルンバルーン<small>プッチタウン</small></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパレード<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">ぶんぶんばち<small>ハローガーデン</small></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">チララのフラワーワゴン<small>ハローガーデン</small></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">でんでんむし<small>ハローガーデン</small></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">アクロエックス エボリューション<small>モビパーク</small></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">ene-1（エネワン）<small>モビパーク</small></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">アドベンボート フロンティア<small>アドベンチャーV</small></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">スモッグ ラッシュ アドベンチャー<small>アドベンチャーV</small></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">サーキットホイール<small>GPフィールド</small></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">サーキットチャレンジャー<small>レーシングコース</small></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="コチラドライビングスクール">コチラドライビングスクール<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="チクタクトレイン">チクタクトレイン<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="テストフライト">テストフライト<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパワーショベル">プッチパワーショベル<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="ルンルンバルーン">ルンルンバルーン<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパレード">プッチパレード<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="ぶんぶんばち">ぶんぶんばち<small>ハローガーデン</small></td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="チララのフラワーワゴン">チララのフラワーワゴン<small>ハローガーデン</small></td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="でんでんむし">でんでんむし<small>ハローガーデン</small></td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="アクロエックス エボリューション">アクロエックス エボリューション<small>モビパーク</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="ene-1">ene-1（エネワン）<small>モビパーク</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="アドベンボート フロンティア">アドベンボート フロンティア<small>アドベンチャーV</small></td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="スモッグラッシュアドベンチャー">スモッグ ラッシュ アドベンチャー<small>アドベンチャーV</small></td><td class="wt wt-cell"></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="サーキットホイール">サーキットホイール<small>GPフィールド</small></td><td class="wt wt-cell"></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="サーキットチャレンジャー">サーキットチャレンジャー<small>レーシングコース</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
 </tbody>
 </table>
 <div class="fn">15件 ／ 大人4名いるので付添い枠に余裕あり</div>
 </div>
 
-<!-- ─── B：上の子・下の子で分けて行動 ─── -->
+<!-- ─── B ─── -->
 <div class="pat" data-pat="B">
 <div class="ph">
   <div class="ph-t">パターンB：上の子チーム＋下の子チームで別行動</div>
@@ -128,30 +144,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 
 <div class="sc"><div class="d" style="background:#e60012"></div>上の子チーム 大人2＋6歳＋5歳で追加<div class="c">6件</div></div>
 <table class="tb">
-<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
+<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
 <tbody>
-<tr><td class="n">プッチパトロール<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">プッチグランプリ<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">菜園めいろ ポタジェンヌ<small>ハローガーデン</small></td><td class="cap">—</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
-<tr><td class="n">パラ・セイラー<small>アドベンチャーV</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ピンキーバイク プラス<small>モトフィールド</small></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">キッズバイク トレーニング<small>モトフィールド／補助輪なし自転車要</small></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="プッチパトロール">プッチパトロール<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="プッチグランプリ">プッチグランプリ<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ポタジェンヌ">菜園めいろ ポタジェンヌ<small>ハローガーデン</small></td><td class="wt wt-cell"></td><td class="cap">—</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
+<tr><td class="n" data-wt="パラ・セイラー">パラ・セイラー<small>アドベンチャーV</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ピンキーバイクプラス">ピンキーバイク プラス<small>モトフィールド</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="キッズバイクトレーニング">キッズバイク トレーニング<small>モトフィールド／補助輪なし自転車要</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ng">✕</td></tr>
 </tbody>
 </table>
 
 <div class="sc"><div class="d" style="background:#2563eb"></div>下の子チーム 大人2＋3歳＋2歳で追加<div class="c">3件</div></div>
 <table class="tb">
-<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
+<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
 <tbody>
-<tr><td class="n">プッチパトロール<small>プッチタウン／3歳〜1人OK</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">パラ・セイラー<small>アドベンチャーV／3歳〜付添い</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ピンキーバイク プラス<small>モトフィールド／3歳〜1人OK</small></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="プッチパトロール">プッチパトロール<small>プッチタウン／3歳〜1人OK</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="パラ・セイラー">パラ・セイラー<small>アドベンチャーV／3歳〜付添い</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ピンキーバイクプラス">ピンキーバイク プラス<small>モトフィールド／3歳〜1人OK</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
 </tbody>
 </table>
 <div class="fn">パターンA（15件）＋上記を各チームで追加利用</div>
 </div>
 
-<!-- ─── C：大人チーム＋上の子 ─── -->
+<!-- ─── C ─── -->
 <div class="pat" data-pat="C">
 <div class="ph">
   <div class="ph-t">パターンC：大人と上の子チーム（8件）</div>
@@ -162,22 +178,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   </div>
 </div>
 <table class="tb">
-<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
+<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
 <tbody>
-<tr><td class="n">コチラドライビングスクール<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">テストフライト<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパワーショベル<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパトロール<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">プッチパレード<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチグランプリ<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">パラ・セイラー<small>アドベンチャーV</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ピンキーバイク プラス<small>モトフィールド</small></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="コチラドライビングスクール">コチラドライビングスクール<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="テストフライト">テストフライト<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパワーショベル">プッチパワーショベル<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパトロール">プッチパトロール<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="プッチパレード">プッチパレード<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチグランプリ">プッチグランプリ<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="パラ・セイラー">パラ・セイラー<small>アドベンチャーV</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ピンキーバイクプラス">ピンキーバイク プラス<small>モトフィールド</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
 </tbody>
 </table>
 <div class="fn">6歳・5歳は◎で待ち時間なく次々乗れる ／ 大人2名が下の子をフォロー</div>
 </div>
 
-<!-- ─── D：子どもだけで乗れる ─── -->
+<!-- ─── D ─── -->
 <div class="pat" data-pat="D">
 <div class="ph">
   <div class="ph-t">パターンD：6歳＆5歳が子どもだけで乗れる（7件）</div>
@@ -189,38 +205,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   </div>
 </div>
 <table class="tb">
-<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
+<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
 <tbody>
-<tr><td class="n">コチラドライビングスクール<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">テストフライト<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパワーショベル<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパトロール<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">プッチパレード<small>プッチタウン</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">パラ・セイラー<small>アドベンチャーV</small></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ピンキーバイク プラス<small>モトフィールド</small></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="コチラドライビングスクール">コチラドライビングスクール<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="テストフライト">テストフライト<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパワーショベル">プッチパワーショベル<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパトロール">プッチパトロール<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="プッチパレード">プッチパレード<small>プッチタウン</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="パラ・セイラー">パラ・セイラー<small>アドベンチャーV</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ピンキーバイクプラス">ピンキーバイク プラス<small>モトフィールド</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
 </tbody>
 </table>
 <div class="fn">◎＝付添いなしで子どもだけ乗車OK</div>
 </div>
 
-<!-- ─── E：条件付 ─── -->
+<!-- ─── E ─── -->
 <div class="pat" data-pat="E">
 <div class="ph">
   <div class="ph-t">パターンE：条件付き — 身長・ライセンス（9件）</div>
   <div class="ph-d">身長120cm以上、補助輪なし自転車、ライセンス取得等の条件を満たせば乗車可能。</div>
 </div>
 <table class="tb">
-<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
+<thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead>
 <tbody>
-<tr><td class="n">ドリームR<small>モビパーク／小3以上+120cm↑</small></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ロッキーコースター<small>アドベンチャーV／120cm↑</small></td><td class="cap">4</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">GPレーサーズ<small>GPフィールド／120cm↑</small></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">デュエルGP<small>GPフィールド／120cm↑</small></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">カートアタッカー<small>モビパーク／小3以上+130cm↑</small></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">キッズバイク トレーニング<small>モトフィールド／補助輪なし自転車要</small></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">アクロバイク<small>モトフィールド／A級ライセンス小1↑</small></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">モトファイター<small>モトフィールド／A級ライセンス6歳↑</small></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">アドベンチャードライブ<small>アドベンチャーV／100cm↑</small></td><td class="cap">3</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
+<tr><td class="n" data-wt="ドリームR">ドリームR<small>モビパーク／小3以上+120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ロッキーコースター">ロッキーコースター<small>アドベンチャーV／120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="GPレーサーズ">GPレーサーズ<small>GPフィールド／120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="デュエルGP">デュエルGP<small>GPフィールド／120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="カートアタッカー">カートアタッカー<small>モビパーク／小3以上+130cm↑</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="キッズバイクトレーニング">キッズバイク トレーニング<small>モトフィールド／補助輪なし自転車要</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="アクロバイク">アクロバイク<small>モトフィールド／A級ライセンス小1↑</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="モトファイター">モトファイター<small>モトフィールド／A級ライセンス6歳↑</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="アドベンチャードライブ">アドベンチャードライブ<small>アドベンチャーV／100cm↑</small></td><td class="wt wt-cell"></td><td class="cap">3</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
 </tbody>
 </table>
 <div class="fn">★＝身長やライセンス条件を満たせば乗車可能</div>
@@ -251,76 +267,81 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <b style="color:#e60012">★</b> 条件付
 </div>
 
+<div class="wt-bar" id="wtBar2">
+  <div class="dot"></div>
+  <span id="wtText2">待ち時間を取得中...</span>
+</div>
+
 <div class="scroll-area">
 
 <div class="ag-sec" data-f="kpt">
 <div class="sc"><div class="d" style="background:#e60012"></div>コチラのプッチタウン<div class="c">8件</div></div>
-<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
-<tr><td class="n">コチラドライビングスクール</td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">チクタクトレイン</td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">テストフライト</td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパワーショベル</td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパトロール</td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">プッチグランプリ</td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ルンルンバルーン</td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">プッチパレード</td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
+<tr><td class="n" data-wt="コチラドライビングスクール">コチラドライビングスクール</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="チクタクトレイン">チクタクトレイン</td><td class="wt wt-cell"></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="テストフライト">テストフライト</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパワーショベル">プッチパワーショベル</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパトロール">プッチパトロール</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="プッチグランプリ">プッチグランプリ</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ルンルンバルーン">ルンルンバルーン</td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="プッチパレード">プッチパレード</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
 </tbody></table>
 </div>
 
 <div class="ag-sec" data-f="chg">
 <div class="sc"><div class="d" style="background:#4ecdc4"></div>チララのハローガーデン<div class="c">4件</div></div>
-<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
-<tr><td class="n">ぶんぶんばち</td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">チララのフラワーワゴン</td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">でんでんむし</td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">菜園めいろ ポタジェンヌ</td><td class="cap">—</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
+<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
+<tr><td class="n" data-wt="ぶんぶんばち">ぶんぶんばち</td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="チララのフラワーワゴン">チララのフラワーワゴン</td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="でんでんむし">でんでんむし</td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="ポタジェンヌ">菜園めいろ ポタジェンヌ</td><td class="wt wt-cell"></td><td class="cap">—</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
 </tbody></table>
 </div>
 
 <div class="ag-sec" data-f="pmp">
 <div class="sc"><div class="d" style="background:#3b82f6"></div>プートのモビパーク<div class="c">4件</div></div>
-<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
-<tr><td class="n">アクロエックス</td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">ドリームR<small>120cm↑</small></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ene-1（エネワン）</td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">カートアタッカー<small>130cm↑</small></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
+<tr><td class="n" data-wt="アクロエックス エボリューション">アクロエックス</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="ドリームR">ドリームR<small>120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ene-1">ene-1（エネワン）</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="カートアタッカー">カートアタッカー<small>130cm↑</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
 </tbody></table>
 </div>
 
 <div class="ag-sec" data-f="pmf">
 <div class="sc"><div class="d" style="background:#f59e0b"></div>ピピラのモトフィールド<div class="c">4件</div></div>
-<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
-<tr><td class="n">キッズバイク<small>補助輪なし要</small></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ピンキーバイク プラス</td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">アクロバイク<small>要ライセンス</small></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">モトファイター<small>要ライセンス</small></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
+<tr><td class="n" data-wt="キッズバイクトレーニング">キッズバイク<small>補助輪なし要</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ht">★</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ピンキーバイクプラス">ピンキーバイク プラス</td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="アクロバイク">アクロバイク<small>要ライセンス</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="モトファイター">モトファイター<small>要ライセンス</small></td><td class="wt wt-cell"></td><td class="cap">1</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
 </tbody></table>
 </div>
 
 <div class="ag-sec" data-f="bav">
 <div class="sc"><div class="d" style="background:#8b5cf6"></div>バットのアドベンチャーヴィレッジ<div class="c">5件</div></div>
-<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
-<tr><td class="n">アドベンチャードライブ<small>100cm↑</small></td><td class="cap">3</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
-<tr><td class="n">アドベンボート フロンティア</td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">パラ・セイラー</td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">ロッキーコースター<small>120cm↑</small></td><td class="cap">4</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">スモッグ ラッシュ</td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
+<tr><td class="n" data-wt="アドベンチャードライブ">アドベンチャードライブ<small>100cm↑</small></td><td class="wt wt-cell"></td><td class="cap">3</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-ht">★</td></tr>
+<tr><td class="n" data-wt="アドベンボート フロンティア">アドベンボート フロンティア</td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="パラ・セイラー">パラ・セイラー</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ok">◎</td><td class="a s-ok">◎</td><td class="a s-as">△</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="ロッキーコースター">ロッキーコースター<small>120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">4</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="スモッグラッシュアドベンチャー">スモッグ ラッシュ</td><td class="wt wt-cell"></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
 </tbody></table>
 </div>
 
 <div class="ag-sec" data-f="gpf">
 <div class="sc"><div class="d" style="background:#06b6d4"></div>GPフィールド<div class="c">3件</div></div>
-<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
-<tr><td class="n">サーキットホイール</td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
-<tr><td class="n">GPレーサーズ<small>120cm↑</small></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
-<tr><td class="n">デュエルGP<small>120cm↑</small></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
+<tr><td class="n" data-wt="サーキットホイール">サーキットホイール</td><td class="wt wt-cell"></td><td class="cap">6</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<tr><td class="n" data-wt="GPレーサーズ">GPレーサーズ<small>120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
+<tr><td class="n" data-wt="デュエルGP">デュエルGP<small>120cm↑</small></td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-ht">★</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td><td class="a s-ng">✕</td></tr>
 </tbody></table>
 </div>
 
 <div class="ag-sec" data-f="cgr">
 <div class="sc"><div class="d" style="background:#f43f5e"></div>サーキットチャレンジャー<div class="c">1件</div></div>
-<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
-<tr><td class="n">サーキットチャレンジャー</td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
+<table class="tb"><thead><tr><th class="n" style="text-align:left">アトラクション名</th><th class="wt">待ち</th><th>定員</th><th>6歳</th><th>5歳</th><th>3歳</th><th>2歳</th></tr></thead><tbody>
+<tr><td class="n" data-wt="サーキットチャレンジャー">サーキットチャレンジャー</td><td class="wt wt-cell"></td><td class="cap">2</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td><td class="a s-as">△</td></tr>
 </tbody></table>
 </div>
 
@@ -353,6 +374,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 </nav>
 
 <script>
+/* ===== 既存ナビ・フィルター（変更なし） ===== */
 const MU='https://platinumaps.jp/maps/suzukacircuit_park/?floor=G&culture=ja';
 let ml=false;
 document.querySelectorAll('.bn button').forEach(b=>{
@@ -388,6 +410,53 @@ document.getElementById('mf').onerror=()=>{
   document.getElementById('mw').style.display='none';
   document.getElementById('mfb').style.display='block';
 };
+
+/* ===== 待ち時間取得 ===== */
+const WORKER_URL='https://suzuka-wait.kw9-kmft.workers.dev/api/wait';
+const REFRESH=5*60*1000;
+
+async function fetchWait(){
+  try{
+    const r=await fetch(WORKER_URL);
+    const d=await r.json();
+    if(!d.ok||!d.attractions||d.attractions.length===0){
+      setStatus('データ取得できませんでした');return;
+    }
+    const m={};
+    d.attractions.forEach(a=>{m[a.name]=a});
+    document.querySelectorAll('td[data-wt]').forEach(td=>{
+      const nm=td.getAttribute('data-wt');
+      const wc=td.nextElementSibling;
+      if(!wc||!wc.classList.contains('wt-cell'))return;
+      const info=m[nm];
+      if(!info){wc.innerHTML='<span class="wt-b wt-x">—</span>';return}
+      if(info.status==='closed'||info.wait==='運休'){
+        wc.innerHTML='<span class="wt-b wt-x">運休</span>';
+      }else if(info.waitMin!==null){
+        let c='wt-g';
+        if(info.waitMin>40)c='wt-r';
+        else if(info.waitMin>15)c='wt-y';
+        wc.innerHTML='<span class="wt-b '+c+'">'+info.wait+'</span>';
+      }else{
+        wc.innerHTML='<span class="wt-b wt-x">'+(info.wait||'—')+'</span>';
+      }
+    });
+    setStatus(d.date+' ── '+d.updatedAt+' 更新（5分毎）');
+  }catch(e){
+    setStatus('通信エラー（リトライします）');
+  }
+}
+function setStatus(t){
+  const e1=document.getElementById('wtText1');
+  const e2=document.getElementById('wtText2');
+  if(e1)e1.textContent=t;
+  if(e2)e2.textContent=t;
+}
+document.querySelectorAll('.wt-cell').forEach(td=>{
+  td.innerHTML='<span class="wt-b wt-ld">…</span>';
+});
+fetchWait();
+setInterval(fetchWait,REFRESH);
 </script>
 
 </body>
