@@ -33,7 +33,6 @@ tr:nth-child(even){background:#1f1f35}
 .ok2{color:#ffc107}
 .ng{color:#ff5252}
 .show{color:#90caf9}
-.closed{color:#666;text-decoration:line-through}
 .cond-btn{background:#4a4a6a;color:#fff;border:none;border-radius:4px;padding:4px 6px;font-size:9px;cursor:pointer}
 .legend{background:#2d2d44;border-radius:8px;padding:10px;margin:10px 0;font-size:11px;line-height:1.8}
 .legend span{display:inline-block;margin:0 4px}
@@ -47,6 +46,10 @@ tr:nth-child(even){background:#1f1f35}
 .modal-box p{font-size:12px;line-height:1.7;margin-bottom:8px}
 .modal-box .close-btn{display:block;margin:12px auto 0;background:#ffd700;color:#333;border:none;border-radius:6px;padding:8px 24px;font-weight:bold;cursor:pointer}
 .height-req{color:#ff9800;font-weight:bold}
+
+/* 読み込み中アニメーション */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.loading-dot{animation:blink 1.2s infinite;color:#888;font-size:12px;letter-spacing:1px}
 </style>
 </head>
 <body>
@@ -69,75 +72,75 @@ tr:nth-child(even){background:#1f1f35}
 <div class="area area-nintendo">🍄 スーパー・ニンテンドー・ワールド</div>
 <table>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
-<tr><td class="attr-name">マリオカート<br>～クッパの挑戦状～</td><td class="wait-cell" id="w-mario-kart">--</td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m01')">詳細</button></td></tr>
-<tr><td class="attr-name">ヨッシー・アドベンチャー</td><td class="wait-cell" id="w-yoshi">--</td><td class="ok4">◎</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m02')">詳細</button></td></tr>
-<tr><td class="attr-name">ドンキーコングの<br>クレイジー・トロッコ</td><td class="wait-cell" id="w-donkey">--</td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m03')">詳細</button></td></tr>
+<tr><td class="attr-name">マリオカート<br>～クッパの挑戦状～</td><td class="wait-cell" id="w-mario-kart"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m01')">詳細</button></td></tr>
+<tr><td class="attr-name">ヨッシー・アドベンチャー</td><td class="wait-cell" id="w-yoshi"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m02')">詳細</button></td></tr>
+<tr><td class="attr-name">ドンキーコングの<br>クレイジー・トロッコ</td><td class="wait-cell" id="w-donkey"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m03')">詳細</button></td></tr>
 </table>
 
 <!-- ===== ハリー・ポッター ===== -->
 <div class="area area-harry">⚡ ウィザーディング・ワールド</div>
 <table>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
-<tr><td class="attr-name">フォービドゥン・ジャーニー</td><td class="wait-cell" id="w-forbidden">--</td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m04')">詳細</button></td></tr>
-<tr><td class="attr-name">フライト・オブ・ザ・<br>ヒッポグリフ</td><td class="wait-cell" id="w-hippo">--</td><td class="ok2">○</td><td>🟡</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m05')">詳細</button></td></tr>
-<tr><td class="attr-name">オリバンダーの店</td><td class="wait-cell" id="w-ollivander">--</td><td class="ok2">○</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m06')">詳細</button></td></tr>
+<tr><td class="attr-name">フォービドゥン・ジャーニー</td><td class="wait-cell" id="w-forbidden"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m04')">詳細</button></td></tr>
+<tr><td class="attr-name">フライト・オブ・ザ・<br>ヒッポグリフ</td><td class="wait-cell" id="w-hippo"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m05')">詳細</button></td></tr>
+<tr><td class="attr-name">オリバンダーの店</td><td class="wait-cell" id="w-ollivander"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m06')">詳細</button></td></tr>
 </table>
 
 <!-- ===== ミニオン・パーク ===== -->
 <div class="area area-minion">🍌 ミニオン・パーク</div>
 <table>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
-<tr><td class="attr-name">ミニオン・ハチャメチャ・ライド</td><td class="wait-cell" id="w-minion-ride">--</td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m07')">詳細</button></td></tr>
-<tr><td class="attr-name">ミニオン・ハチャメチャ・<br>ミッション</td><td class="wait-cell" id="w-minion-mission">--</td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m08')">詳細</button></td></tr>
-<tr><td class="attr-name">フリーズ・レイ・スライダー</td><td class="wait-cell" id="w-freeze-ray">--</td><td class="ok2">○</td><td>🟡</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m09')">詳細</button></td></tr>
+<tr><td class="attr-name">ミニオン・ハチャメチャ・ライド</td><td class="wait-cell" id="w-minion-ride"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m07')">詳細</button></td></tr>
+<tr><td class="attr-name">ミニオン・ハチャメチャ・<br>ミッション</td><td class="wait-cell" id="w-minion-mission"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m08')">詳細</button></td></tr>
+<tr><td class="attr-name">フリーズ・レイ・スライダー</td><td class="wait-cell" id="w-freeze-ray"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m09')">詳細</button></td></tr>
 </table>
 
 <!-- ===== ワンダーランド ===== -->
 <div class="area area-wonder">🎀 ユニバーサル・ワンダーランド</div>
 <table>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
-<tr><td class="attr-name">エルモのバブル・バブル</td><td class="wait-cell" id="w-elmo-bubble">--</td><td class="ok4">◎</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m10')">詳細</button></td></tr>
-<tr><td class="attr-name">エルモのゴーゴー・<br>スケートボード</td><td class="wait-cell" id="w-elmo-skate">--</td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m11')">詳細</button></td></tr>
-<tr><td class="attr-name">エルモのリトル・ドライブ</td><td class="wait-cell" id="w-elmo-drive">--</td><td class="ok2">○</td><td>🟢</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m12')">詳細</button></td></tr>
-<tr><td class="attr-name">モッピーのバルーン・トリップ</td><td class="wait-cell" id="w-moppy">--</td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m13')">詳細</button></td></tr>
-<tr><td class="attr-name">ビッグバードの<br>ビックトップ・サーカス</td><td class="wait-cell" id="w-bigbird">--</td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m14')">詳細</button></td></tr>
-<tr><td class="attr-name">フライング・スヌーピー</td><td class="wait-cell" id="w-flying-snoopy">--</td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m15')">詳細</button></td></tr>
-<tr><td class="attr-name">スヌーピーのフライング・<br>エース・アドベンチャー</td><td class="wait-cell" id="w-snoopy-ace">--</td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m16')">詳細</button></td></tr>
-<tr><td class="attr-name">ハローキティの<br>カップケーキ・ドリーム</td><td class="wait-cell" id="w-kitty-cup">--</td><td class="ok2">○</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m17')">詳細</button></td></tr>
-<tr><td class="attr-name">ハローキティの<br>リボン・コレクション</td><td class="wait-cell" id="w-kitty-ribbon">--</td><td class="show">★</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m18')">詳細</button></td></tr>
+<tr><td class="attr-name">エルモのバブル・バブル</td><td class="wait-cell" id="w-elmo-bubble"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m10')">詳細</button></td></tr>
+<tr><td class="attr-name">エルモのゴーゴー・<br>スケートボード</td><td class="wait-cell" id="w-elmo-skate"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m11')">詳細</button></td></tr>
+<tr><td class="attr-name">エルモのリトル・ドライブ</td><td class="wait-cell" id="w-elmo-drive"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m12')">詳細</button></td></tr>
+<tr><td class="attr-name">モッピーのバルーン・トリップ</td><td class="wait-cell" id="w-moppy"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m13')">詳細</button></td></tr>
+<tr><td class="attr-name">ビッグバードの<br>ビックトップ・サーカス</td><td class="wait-cell" id="w-bigbird"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m14')">詳細</button></td></tr>
+<tr><td class="attr-name">フライング・スヌーピー</td><td class="wait-cell" id="w-flying-snoopy"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m15')">詳細</button></td></tr>
+<tr><td class="attr-name">スヌーピーのフライング・<br>エース・アドベンチャー</td><td class="wait-cell" id="w-snoopy-ace"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m16')">詳細</button></td></tr>
+<tr><td class="attr-name">ハローキティの<br>カップケーキ・ドリーム</td><td class="wait-cell" id="w-kitty-cup"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m17')">詳細</button></td></tr>
+<tr><td class="attr-name">ハローキティの<br>リボン・コレクション</td><td class="wait-cell" id="w-kitty-ribbon"><span class="loading-dot">…</span></td><td class="show">★</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m18')">詳細</button></td></tr>
 </table>
 
 <!-- ===== ジュラシック・パーク ===== -->
 <div class="area area-jurassic">🦕 ジュラシック・パーク</div>
 <table>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
-<tr><td class="attr-name">ジュラシックパーク・ザ・ライド</td><td class="wait-cell" id="w-jurassic">--</td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m19')">詳細</button></td></tr>
-<tr><td class="attr-name">ザ・フライング・ダイナソー</td><td class="wait-cell" id="w-flying-dino">--</td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m20')">詳細</button></td></tr>
+<tr><td class="attr-name">ジュラシックパーク・ザ・ライド</td><td class="wait-cell" id="w-jurassic"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m19')">詳細</button></td></tr>
+<tr><td class="attr-name">ザ・フライング・ダイナソー</td><td class="wait-cell" id="w-flying-dino"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m20')">詳細</button></td></tr>
 </table>
 
 <!-- ===== アミティ・ビレッジ ===== -->
 <div class="area area-amity">🦈 アミティ・ビレッジ</div>
 <table>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
-<tr><td class="attr-name">ジョーズ</td><td class="wait-cell" id="w-jaws">--</td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m21')">詳細</button></td></tr>
+<tr><td class="attr-name">ジョーズ</td><td class="wait-cell" id="w-jaws"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m21')">詳細</button></td></tr>
 </table>
 
 <!-- ===== ハリウッド・エリア ===== -->
 <div class="area area-hollywood">🎬 ハリウッド・エリア</div>
 <table>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
-<tr><td class="attr-name">ハリウッド・ドリーム<br>・ザ・ライド</td><td class="wait-cell" id="w-hollywood">--</td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m22')">詳細</button></td></tr>
-<tr><td class="attr-name">ハリウッド・ドリーム<br>～バックドロップ～</td><td class="wait-cell" id="w-backdrop">--</td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m23')">詳細</button></td></tr>
-<tr><td class="attr-name">スペース・ファンタジー<br>～CLUB ZEDD REMIX～</td><td class="wait-cell" id="w-space-fantasy">--</td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m24')">詳細</button></td></tr>
-<tr><td class="attr-name">シング・オン・ツアー</td><td class="wait-cell" id="w-sing">--</td><td class="show">★</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m25')">詳細</button></td></tr>
-<tr><td class="attr-name">プレイング・ウィズ<br>おさるのジョージ</td><td class="wait-cell" id="w-george">--</td><td class="show">★</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m26')">詳細</button></td></tr>
-<tr><td class="attr-name">呪術廻戦・ザ・リアル 4-D<br>～廻る時計台～</td><td class="wait-cell" id="w-jujutsu">--</td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m27')">詳細</button></td></tr>
-<tr><td class="attr-name">名探偵コナン・ワールド</td><td class="wait-cell" id="w-conan">--</td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m28')">詳細</button></td></tr>
+<tr><td class="attr-name">ハリウッド・ドリーム<br>・ザ・ライド</td><td class="wait-cell" id="w-hollywood"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m22')">詳細</button></td></tr>
+<tr><td class="attr-name">ハリウッド・ドリーム<br>～バックドロップ～</td><td class="wait-cell" id="w-backdrop"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m23')">詳細</button></td></tr>
+<tr><td class="attr-name">スペース・ファンタジー<br>～CLUB ZEDD REMIX～</td><td class="wait-cell" id="w-space-fantasy"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m24')">詳細</button></td></tr>
+<tr><td class="attr-name">シング・オン・ツアー</td><td class="wait-cell" id="w-sing"><span class="loading-dot">…</span></td><td class="show">★</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m25')">詳細</button></td></tr>
+<tr><td class="attr-name">プレイング・ウィズ<br>おさるのジョージ</td><td class="wait-cell" id="w-george"><span class="loading-dot">…</span></td><td class="show">★</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m26')">詳細</button></td></tr>
+<tr><td class="attr-name">呪術廻戦・ザ・リアル 4-D<br>～廻る時計台～</td><td class="wait-cell" id="w-jujutsu"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m27')">詳細</button></td></tr>
+<tr><td class="attr-name">名探偵コナン・ワールド</td><td class="wait-cell" id="w-conan"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m28')">詳細</button></td></tr>
 </table>
 
 <!-- ===== 待ち時間バー ===== -->
 <div class="wait-bar">
-  <div class="time-label" id="update-label">読み込み中...</div>
+  <div class="time-label" id="update-label">⏳ 待ち時間を取得中...</div>
   <button class="refresh-btn" onclick="fetchLive()">🔄 更新</button>
 </div>
 
@@ -172,25 +175,16 @@ tr:nth-child(even){background:#1f1f35}
 <div class="modal-overlay" id="m28"><div class="modal-box"><h3>名探偵コナン・ワールド</h3><p>身長制限: 特になし</p><p>👦5歳(110cm): 参加可能<br>👧3歳(92cm): 内容が難しい可能性</p><p>謎解き・ウォークスルー系。期間限定。</p><button class="close-btn" onclick="closeModal('m28')">閉じる</button></div></div>
 
 <script>
-// ===== queue-times.com ride ID → HTML cell ID =====
 var ID_MAP={12061:"w-mario-kart",12071:"w-yoshi",14402:"w-donkey",12065:"w-forbidden",12073:"w-hippo",12197:"w-ollivander",12066:"w-minion-ride",14918:"w-minion-mission",12072:"w-freeze-ray",7098:"w-elmo-bubble",7067:"w-elmo-skate",7071:"w-elmo-drive",7075:"w-moppy",7061:"w-bigbird",12075:"w-flying-snoopy",14919:"w-snoopy-ace",7065:"w-kitty-cup",7063:"w-kitty-ribbon",12067:"w-jurassic",7092:"w-flying-dino",12068:"w-jaws",7077:"w-hollywood",12070:"w-backdrop",15428:"w-space-fantasy",7214:"w-sing",12091:"w-george",15427:"w-jujutsu",13005:"w-conan"};
 
-// ===== HTML cell ID → usjinfo.com attr_id =====
 var LINK_MAP={"w-mario-kart":28684,"w-yoshi":28685,"w-donkey":28708,"w-forbidden":30,"w-hippo":29,"w-ollivander":28695,"w-minion-ride":71,"w-minion-mission":28711,"w-freeze-ray":82,"w-elmo-bubble":68,"w-elmo-skate":44,"w-elmo-drive":67,"w-moppy":45,"w-bigbird":66,"w-flying-snoopy":10,"w-snoopy-ace":28712,"w-kitty-cup":11,"w-kitty-ribbon":28694,"w-jurassic":2,"w-flying-dino":58,"w-jaws":1,"w-hollywood":8,"w-backdrop":13,"w-space-fantasy":28722,"w-sing":88,"w-george":81,"w-jujutsu":28721,"w-conan":28703};
 
-// ===== フォールバックデータ =====
-var FB=[{id:12061,w:50,o:1},{id:12071,w:40,o:1},{id:14402,w:60,o:1},{id:12065,w:30,o:1},{id:12073,w:40,o:1},{id:12197,w:15,o:1},{id:12066,w:35,o:1},{id:14918,w:25,o:1},{id:12072,w:20,o:1},{id:7098,w:45,o:1},{id:7067,w:40,o:1},{id:7071,w:10,o:1},{id:7075,w:30,o:1},{id:7061,w:20,o:1},{id:12075,w:20,o:1},{id:14919,w:30,o:1},{id:7065,w:5,o:1},{id:7063,w:30,o:1},{id:12067,w:15,o:1},{id:7092,w:45,o:1},{id:12068,w:30,o:1},{id:7077,w:60,o:1},{id:12070,w:70,o:1},{id:15428,w:50,o:1},{id:7214,w:10,o:1},{id:12091,w:10,o:1},{id:15427,w:30,o:1},{id:13005,w:20,o:1}];
-
-// ===== リンク遷移（location.hrefで同一ウィンドウ遷移） =====
 function goLink(cellId){
   var aid=LINK_MAP[cellId];
-  if(aid){
-    location.href="https://usjinfo.com/wait/sp/attrWait.php?attr_id="+aid;
-  }
+  if(aid) location.href="https://usjinfo.com/wait/sp/attrWait.php?attr_id="+aid;
 }
 
-// ===== 待ち時間適用 =====
-function applyRides(rides,label){
+function applyRides(rides,label,isLive){
   for(var i=0;i<rides.length;i++){
     var r=rides[i];
     var cid=ID_MAP[r.id];
@@ -200,24 +194,26 @@ function applyRides(rides,label){
     if(!r.o){
       cell.innerHTML='<span style="color:#999">運休</span>';
       cell.className="wait-cell wc";
-    }else{
+    }else if(isLive){
       var cls="wg";
-      if(r.w>60)cls="wr";
-      else if(r.w>30)cls="wy";
+      if(r.w>60)cls="wr"; else if(r.w>30)cls="wy";
       cell.innerHTML='<span>'+r.w+'分</span>';
       cell.className="wait-cell "+cls;
+    }else{
+      // 読み込み中 → 点滅アニメーション表示
+      cell.innerHTML='<span class="loading-dot">…</span>';
+      cell.className="wait-cell";
     }
-    // onclick を直接設定（<a>タグ不使用）
-    (function(id){
-      cell.onclick=function(){goLink(id);};
-    })(cid);
+    (function(id){cell.onclick=function(){goLink(id);};})(cid);
   }
   var lbl=document.getElementById("update-label");
   if(lbl)lbl.textContent=label;
 }
 
-// ===== ライブ取得 =====
 function fetchLive(){
+  var lbl=document.getElementById("update-label");
+  if(lbl)lbl.textContent="⏳ 取得中...";
+
   var urls=[
     "https://queue-times.com/parks/284/queue_times.json",
     "https://api.allorigins.win/raw?url="+encodeURIComponent("https://queue-times.com/parks/284/queue_times.json"),
@@ -225,7 +221,10 @@ function fetchLive(){
   ];
   var tried=0;
   function tryNext(){
-    if(tried>=urls.length){applyRides(FB,"参考値（取得失敗）");return;}
+    if(tried>=urls.length){
+      if(lbl)lbl.textContent="⚠ 取得失敗（タップで再試行）";
+      return;
+    }
     var url=urls[tried];tried++;
     var xhr=new XMLHttpRequest();
     xhr.open("GET",url,true);
@@ -247,7 +246,7 @@ function fetchLive(){
           if(ar.length>0){
             var now=new Date();
             var ts=(now.getHours()<10?"0":"")+now.getHours()+":"+(now.getMinutes()<10?"0":"")+now.getMinutes();
-            applyRides(ar,"LIVE "+ts+" 更新");
+            applyRides(ar,"✅ LIVE "+ts+" 更新",true);
           }else{tryNext();}
         }catch(e){tryNext();}
       }else{tryNext();}
@@ -259,13 +258,11 @@ function fetchLive(){
   tryNext();
 }
 
-// ===== モーダル =====
 function openModal(id){var e=document.getElementById(id);if(e)e.classList.add("active");}
 function closeModal(id){var e=document.getElementById(id);if(e)e.classList.remove("active");}
 
-// ===== 起動 =====
-applyRides(FB,"参考値（読み込み中...）");
-setTimeout(fetchLive,500);
+// 起動: まず「…」点滅を表示、すぐにライブ取得
+setTimeout(fetchLive,300);
 setInterval(fetchLive,300000);
 </script>
 
