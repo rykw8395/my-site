@@ -36,9 +36,6 @@ tr:nth-child(even){background:#1f1f35}
 .cond-btn{background:#4a4a6a;color:#fff;border:none;border-radius:4px;padding:4px 6px;font-size:9px;cursor:pointer}
 .legend{background:#2d2d44;border-radius:8px;padding:10px;margin:10px 0;font-size:11px;line-height:1.8}
 .legend span{display:inline-block;margin:0 4px}
-.hours-box{background:#2d2d44;border-radius:8px;padding:10px;margin:10px 0;font-size:12px}
-.hours-box select{background:#3d3d5c;color:#fff;border:none;border-radius:4px;padding:4px;font-size:13px}
-.hours-box .apply-btn{background:#ffd700;color:#333;border:none;border-radius:4px;padding:4px 10px;font-size:11px;font-weight:bold;cursor:pointer}
 .wait-bar{position:fixed;bottom:0;left:0;right:0;background:#2d2d44;padding:8px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-top:2px solid #ffd700}
 .wait-bar .time-label{font-size:11px;color:#aaa}
 .wait-bar .refresh-btn{background:#ffd700;color:#333;border:none;border-radius:6px;padding:8px 16px;font-weight:bold;font-size:12px;cursor:pointer}
@@ -51,6 +48,9 @@ tr:nth-child(even){background:#1f1f35}
 .height-req{color:#ff9800;font-weight:bold}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 .loading-dot{animation:blink 1.2s infinite;color:#888;font-size:12px;letter-spacing:1px}
+.closed-banner{background:#ff9800;color:#333;text-align:center;padding:8px;border-radius:6px;margin:10px 0;font-weight:bold;font-size:13px;display:none}
+.credit{text-align:center;font-size:9px;color:#666;margin:16px 0 4px}
+.credit a{color:#888}
 </style>
 </head>
 <body>
@@ -69,33 +69,7 @@ tr:nth-child(even){background:#1f1f35}
   <strong>※待ち時間タップで詳細ページへ移動</strong>
 </div>
 
-<!-- ===== 営業時間設定 ===== -->
-<div class="hours-box">
-  <strong>🕐 本日の営業時間</strong>
-  <a href="https://www.usj.co.jp/web/ja/jp/park-guide/schedule/park-hour" target="_blank" style="color:#ffd700;font-size:10px;margin-left:6px">公式で確認→</a>
-  <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-    <label>開園 <select id="open-h">
-      <option value="7">7:00</option>
-      <option value="7.5">7:30</option>
-      <option value="8">8:00</option>
-      <option value="8.5" selected>8:30</option>
-      <option value="9">9:00</option>
-      <option value="9.5">9:30</option>
-      <option value="10">10:00</option>
-    </select></label>
-    <label>閉園 <select id="close-h">
-      <option value="17">17:00</option>
-      <option value="18">18:00</option>
-      <option value="19">19:00</option>
-      <option value="20">20:00</option>
-      <option value="20.5">20:30</option>
-      <option value="21" selected>21:00</option>
-      <option value="21.5">21:30</option>
-      <option value="22">22:00</option>
-    </select></label>
-    <button class="apply-btn" onclick="fetchLive()">反映</button>
-  </div>
-</div>
+<div class="closed-banner" id="closed-banner">🌙 現在パークは閉園中です</div>
 
 <!-- ===== スーパー・ニンテンドー・ワールド ===== -->
 <div class="area area-nintendo">🍄 スーパー・ニンテンドー・ワールド</div>
@@ -167,6 +141,8 @@ tr:nth-child(even){background:#1f1f35}
 <tr><td class="attr-name">名探偵コナン・ワールド</td><td class="wait-cell" id="w-conan"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m28')">詳細</button></td></tr>
 </table>
 
+<div class="credit">Powered by <a href="https://queue-times.com" target="_blank">Queue-Times.com</a></div>
+
 <!-- ===== 待ち時間バー ===== -->
 <div class="wait-bar">
   <div class="time-label" id="update-label">⏳ 待ち時間を取得中...</div>
@@ -208,44 +184,83 @@ var ID_MAP={12061:"w-mario-kart",12071:"w-yoshi",14402:"w-donkey",12065:"w-forbi
 
 var LINK_MAP={"w-mario-kart":28684,"w-yoshi":28685,"w-donkey":28708,"w-forbidden":30,"w-hippo":29,"w-ollivander":28695,"w-minion-ride":71,"w-minion-mission":28711,"w-freeze-ray":82,"w-elmo-bubble":68,"w-elmo-skate":44,"w-elmo-drive":67,"w-moppy":45,"w-bigbird":66,"w-flying-snoopy":10,"w-snoopy-ace":28712,"w-kitty-cup":11,"w-kitty-ribbon":28694,"w-jurassic":2,"w-flying-dino":58,"w-jaws":1,"w-hollywood":8,"w-backdrop":13,"w-space-fantasy":28722,"w-sing":88,"w-george":81,"w-jujutsu":28721,"w-conan":28703};
 
-function getJSTHour(){
-  var now=new Date();
-  return (now.getUTCHours()+9)%24+(now.getUTCMinutes()/60);
-}
 function getJSTStr(){
   var now=new Date();
   var h=(now.getUTCHours()+9)%24;
   var m=now.getUTCMinutes();
   return (h<10?"0":"")+h+":"+(m<10?"0":"")+m;
 }
-function isParkOpen(){
-  var o=parseFloat(document.getElementById("open-h").value);
-  var c=parseFloat(document.getElementById("close-h").value);
-  var n=getJSTHour();
-  return n>=o&&n<c;
+
+/* ===== 閉園自動判定 =====
+   営業中 → 待ち時間はバラバラ（5,20,40,90,140...）
+   閉園中 → APIが固定値を返す（全部10, 全部5, 全部0 など）
+   判定条件:
+   1. openなライドが0 → 閉園
+   2. openなライドの待ち時間が全て同一 → 閉園
+   3. openなライドの待ち時間の種類が2以下かつ最大15分以下 → 閉園
+   4. openなライドの80%以上が同じ値 → 閉園
+*/
+function detectParkClosed(rides){
+  var waits=[];
+  for(var i=0;i<rides.length;i++){
+    if(rides[i].o) waits.push(rides[i].w);
+  }
+  // 条件1: openなライドが0
+  if(waits.length===0) return true;
+
+  // 待ち時間の出現回数を集計
+  var freq={};
+  var maxVal=0;
+  for(var i=0;i<waits.length;i++){
+    var v=waits[i];
+    freq[v]=(freq[v]||0)+1;
+    if(v>maxVal) maxVal=v;
+  }
+  var kinds=Object.keys(freq).length;
+
+  // 条件2: 全て同一値
+  if(kinds===1) return true;
+
+  // 条件3: 2種類以下かつ最大15分以下
+  if(kinds<=2 && maxVal<=15) return true;
+
+  // 条件4: 最頻値が80%以上を占める かつ 最大値が20以下
+  var topFreq=0;
+  for(var k in freq){ if(freq[k]>topFreq) topFreq=freq[k]; }
+  if(topFreq/waits.length>=0.8 && maxVal<=20) return true;
+
+  return false;
 }
-function getHoursText(){
-  var os=document.getElementById("open-h");
-  var cs=document.getElementById("close-h");
-  return os.options[os.selectedIndex].text+"〜"+cs.options[cs.selectedIndex].text;
-}
+
 function goLink(cellId){
   var aid=LINK_MAP[cellId];
   if(aid) location.href="https://usjinfo.com/wait/sp/attrWait.php?attr_id="+aid;
 }
 
 function applyRides(rides,label,isLive){
-  var open=isParkOpen();
+  var closed=isLive?detectParkClosed(rides):false;
+  var banner=document.getElementById("closed-banner");
+
+  if(banner){
+    if(isLive&&closed){
+      banner.style.display="block";
+      banner.textContent="🌙 現在パークは閉園中です（"+getJSTStr()+" 確認）";
+    }else{
+      banner.style.display="none";
+    }
+  }
+
   for(var i=0;i<rides.length;i++){
     var r=rides[i];
     var cid=ID_MAP[r.id];
     if(!cid)continue;
     var cell=document.getElementById(cid);
     if(!cell)continue;
+
     if(!isLive){
       cell.innerHTML='<span class="loading-dot">…</span>';
       cell.className="wait-cell";
-    }else if(!open){
+    }else if(closed){
       cell.innerHTML='<span style="color:#666;font-size:9px">閉園中</span>';
       cell.className="wait-cell wc";
     }else if(!r.o){
@@ -262,10 +277,11 @@ function applyRides(rides,label,isLive){
     }
     (function(id){cell.onclick=function(){goLink(id);};})(cid);
   }
+
   var lbl=document.getElementById("update-label");
   if(!lbl)return;
-  if(!isLive)lbl.textContent=label;
-  else if(!open)lbl.textContent="🌙 閉園中（本日 "+getHoursText()+"）";
+  if(!isLive) lbl.textContent=label;
+  else if(closed) lbl.textContent="🌙 閉園中（"+getJSTStr()+" 確認）";
   else lbl.textContent=label;
 }
 
@@ -317,6 +333,7 @@ function fetchLive(){
 function openModal(id){var e=document.getElementById(id);if(e)e.classList.add("active");}
 function closeModal(id){var e=document.getElementById(id);if(e)e.classList.remove("active");}
 
+// 起動
 setTimeout(fetchLive,300);
 setInterval(fetchLive,300000);
 </script>
