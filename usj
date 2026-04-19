@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USJ 全アトラクション完全版｜家族4人向け</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Segoe UI',sans-serif;background:#f5f5f5;color:#333;font-size:14px;line-height:1.5;padding:12px 8px 60px}
+  h1{font-size:15px;text-align:center;padding:12px 8px;background:linear-gradient(135deg,#1a237e,#4a148c);color:#fff;border-radius:10px;margin-bottom:8px}
+  .family-info{background:#fff;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+  .family-info strong{color:#4a148c}
+  .legend{background:#fff;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11px;box-shadow:0 1px 3px rgba(0,0,0,.1);display:flex;flex-wrap:wrap;gap:6px 14px}
+  .legend span{white-space:nowrap}
+  .legend-title{width:100%;font-weight:bold;margin-top:4px}
+  .legend-note{width:100%;margin-top:6px;padding-top:6px;border-top:1px dashed #ccc;color:#c62828;font-weight:bold}
+  /* 待ち時間バー */
+  .wait-bar{background:#fff;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11px;box-shadow:0 1px 3px rgba(0,0,0,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+  .wait-bar .wait-legend{display:flex;gap:6px;flex-wrap:wrap}
+  .wait-bar .wl{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;color:#fff}
+  .wl-green{background:#2e7d32}
+  .wl-yellow{background:#f57f17}
+  .wl-red{background:#c62828}
+  .wl-gray{background:#757575}
+  .wait-bar button{background:#4a148c;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11px;font-weight:bold;cursor:pointer}
+  .wait-bar button:active{background:#6a1b9a}
+  .wait-status{width:100%;font-size:10px;color:#666}
+  .section-title{font-size:14px;font-weight:bold;color:#4a148c;margin:18px 0 6px;padding:8px 12px;background:#ede7f6;border-radius:8px;border-left:4px solid #4a148c}
+  .area-label{background:linear-gradient(135deg,#4a148c,#7b1fa2);color:#fff;font-size:13px;font-weight:bold;padding:8px 12px;border-radius:8px 8px 0 0;margin-top:14px}
+  .area-label-play{background:linear-gradient(135deg,#00695c,#00897b);color:#fff;font-size:13px;font-weight:bold;padding:8px 12px;border-radius:8px 8px 0 0;margin-top:14px}
+  table{width:100%;border-collapse:collapse;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);border-radius:0 0 8px 8px;overflow:hidden;margin-bottom:4px;table-layout:fixed}
+  thead th{background:#e8eaf6;font-size:10px;padding:6px 2px;text-align:center;border-bottom:2px solid #c5cae9;position:sticky;top:0;z-index:2}
+  thead th:first-child{text-align:left;padding-left:6px}
+  /* 6列：アトラクション / 待ち / おすすめ / 5歳 / 3歳 / 条件 */
+  th:nth-child(1),td:nth-child(1){width:34%}
+  th:nth-child(2),td:nth-child(2){width:14%}
+  th:nth-child(3),td:nth-child(3){width:13%}
+  th:nth-child(4),td:nth-child(4){width:10%}
+  th:nth-child(5),td:nth-child(5){width:10%}
+  th:nth-child(6),td:nth-child(6){width:19%}
+  /* プレイランド用（3列） */
+  .play-table th:nth-child(1),.play-table td:nth-child(1){width:52%}
+  .play-table th:nth-child(2),.play-table td:nth-child(2){width:22%}
+  .play-table th:nth-child(3),.play-table td:nth-child(3){width:26%}
+  tbody td{padding:6px 2px;font-size:11px;text-align:center;border-bottom:1px solid #eee;vertical-align:middle}
+  tbody td:first-child{text-align:left;padding-left:6px;font-weight:600;font-size:10.5px;line-height:1.4}
+  tr.ok4{background:#e8f5e9}
+  tr.ok2{background:#fff8e1}
+  tr.ng{background:#fce4ec}
+  tr.show{background:#e3f2fd}
+  tr.play{background:#e0f2f1}
+  tr.closed{background:#f3e5f5}
+  .mark-ok{color:#2e7d32;font-weight:bold;font-size:14px}
+  .mark-cp{color:#f57f17;font-weight:bold;font-size:14px}
+  .mark-ng{color:#c62828;font-weight:bold;font-size:14px}
+  .mark-na{color:#999;font-size:12px}
+  .badge-end{display:inline-block;background:#c62828;color:#fff;font-size:9px;padding:1px 4px;border-radius:3px;margin-top:2px}
+  .badge-stop{display:inline-block;background:#e65100;color:#fff;font-size:9px;padding:1px 4px;border-radius:3px;margin-top:2px}
+  .btn-cond{display:inline-block;background:#5c6bc0;color:#fff;border:none;border-radius:4px;padding:3px 5px;font-size:9px;cursor:pointer;white-space:nowrap}
+  .btn-cond:active{background:#3949ab}
+  .btn-cond-play{display:inline-block;background:#00897b;color:#fff;border:none;border-radius:4px;padding:3px 6px;font-size:10px;cursor:pointer;white-space:nowrap}
+  .btn-cond-play:active{background:#00695c}
+  /* 待ち時間セル */
+  .wait-cell{font-weight:bold;font-size:13px}
+  .wt-green{color:#2e7d32}
+  .wt-yellow{color:#e65100}
+  .wt-red{color:#c62828;animation:pulse .8s infinite alternate}
+  .wt-closed{color:#757575;font-size:10px;font-weight:normal}
+  .wt-na{color:#999;font-size:10px;font-weight:normal}
+  .wt-load{color:#aaa;font-size:10px}
+  @keyframes pulse{from{opacity:1}to{opacity:.5}}
+  .modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);z-index:100;justify-content:center;align-items:center;padding:20px}
+  .modal-overlay.show{display:flex}
+  .modal-box{background:#fff;border-radius:12px;padding:20px 16px;max-width:360px;width:100%;max-height:80vh;overflow-y:auto;position:relative}
+  .modal-box h3{font-size:14px;margin-bottom:10px;padding-right:24px;color:#4a148c}
+  .modal-box p{font-size:12px;margin-bottom:6px;line-height:1.6}
+  .modal-box .tag{display:inline-block;background:#e8eaf6;border-radius:3px;padding:1px 6px;font-size:11px;margin-right:4px;margin-bottom:3px}
+  .modal-close{position:absolute;top:10px;right:12px;background:none;border:none;font-size:22px;cursor:pointer;color:#666;line-height:1}
+  .note{font-size:11px;color:#777;margin-top:6px;padding:0 8px}
+  .note-warn{font-size:11px;color:#c62828;margin-top:6px;padding:0 8px;font-weight:bold}
+</style>
+</head>
+<body>
+
+<h1>🎢 USJ 全アトラクション完全版<br>〜 家族4人おすすめ度 × リアルタイム待ち時間 〜</h1>
+
+<div class="family-info">
+  <strong>👨‍👩‍👧‍👦 家族構成：</strong>大人2名、男児5歳10ヶ月（110cm）、女児3歳1ヶ月（92cm）
+</div>
+
+<div class="wait-bar">
+  <div class="wait-legend">
+    <span class="wl wl-green">〜30分</span>
+    <span class="wl wl-yellow">31〜60分</span>
+    <span class="wl wl-red">61分〜</span>
+    <span class="wl wl-gray">運休</span>
+  </div>
+  <button onclick="fetchWaitTimes()">🔄 更新</button>
+  <div class="wait-status">最終更新: <span id="lastUpdate">--:--</span>（5分毎に自動更新）</div>
+</div>
+
+<div class="legend">
+  <span class="legend-title">【おすすめ度】</span>
+  <span>◎＝4人同時OK</span>
+  <span>⚪︎＝2人ずつ</span>
+  <span>―＝対象外</span>
+  <span class="legend-title">【5歳/3歳】</span>
+  <span>◎＝1人で乗れる</span>
+  <span>⚪︎＝同伴必要</span>
+  <span>×＝乗れない</span>
+  <span class="legend-note">※おすすめ度は「家族4人全員が乗れる」前提で評価。どちらかが×なら ― です。</span>
+</div>
+
+<!-- ========================================== -->
+<!-- PART 1: ライド＋ショーアトラクション -->
+<!-- ========================================== -->
+<div class="section-title">🎢 Part 1：ライド＆ショー・アトラクション</div>
+
+<!-- ===== ニンテンドー ===== -->
+<div class="area-label">🍄 スーパー・ニンテンドー・ワールド</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="ng"><td>マリオカート〜クッパの挑戦状〜</td><td class="wait-cell wt-load" id="w-mario-kart">...</td><td><span class="mark-na">―</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m01')">条件</button></td></tr>
+<tr class="ok2"><td>ヨッシー・アドベンチャー</td><td class="wait-cell wt-load" id="w-yoshi">...</td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m02')">条件</button></td></tr>
+<tr class="ng"><td>ドンキーコングのクレイジー・トロッコ</td><td class="wait-cell wt-load" id="w-donkey">...</td><td><span class="mark-na">―</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m03')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ハリポタ ===== -->
+<div class="area-label">⚡ ウィザーディング・ワールド・オブ・ハリー・ポッター</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="ng"><td>ハリー・ポッター・アンド・ザ・フォービドゥン・ジャーニー</td><td class="wait-cell wt-load" id="w-forbidden">...</td><td><span class="mark-na">―</span></td><td><span class="mark-ng">×</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m04')">条件</button></td></tr>
+<tr class="ok2"><td>フライト・オブ・ザ・ヒッポグリフ</td><td class="wait-cell wt-load" id="w-hippogriff">...</td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m05')">条件</button></td></tr>
+<tr class="show"><td>オリバンダーの店</td><td class="wait-cell wt-load" id="w-ollivanders">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m06')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ミニオン ===== -->
+<div class="area-label">🍌 ミニオン・パーク</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="ok4"><td>ミニオン・ハチャメチャ・ミッション〜大悪党への道〜</td><td class="wait-cell wt-load" id="w-minion-mission">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m07')">条件</button></td></tr>
+<tr class="ng"><td>ミニオン・ハチャメチャ・ライド</td><td class="wait-cell wt-load" id="w-minion-ride">...</td><td><span class="mark-na">―</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m08')">条件</button></td></tr>
+<tr class="ok4"><td>ミニオン・ハチャメチャ・アイス</td><td class="wait-cell wt-load" id="w-freeze-ray">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m09')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ワンダーランド ===== -->
+<div class="area-label">🎪 ユニバーサル・ワンダーランド</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="ok2"><td>スヌーピーのフライング・エース・アドベンチャー</td><td class="wait-cell wt-load" id="w-snoopy-ace">...</td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m10')">条件</button></td></tr>
+<tr class="ok2"><td>フライング・スヌーピー</td><td class="wait-cell wt-load" id="w-flying-snoopy">...</td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m11')">条件</button></td></tr>
+<tr class="ok4"><td>ハローキティのカップケーキ・ドリーム</td><td class="wait-cell wt-load" id="w-kitty-cup">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m12')">条件</button></td></tr>
+<tr class="ok2"><td>エルモのバブル・バブル<br><span class="badge-end">5/10営業終了</span></td><td class="wait-cell wt-load" id="w-elmo-bubble">...</td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m13')">条件</button></td></tr>
+<tr class="ok4"><td>ビッグバードのビッグトップ・サーカス<br><span class="badge-end">5/10営業終了</span></td><td class="wait-cell wt-load" id="w-big-bird">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m14')">条件</button></td></tr>
+<tr class="ok4"><td>エルモのゴーゴー・スケートボード<br><span class="badge-end">5/10営業終了</span></td><td class="wait-cell wt-load" id="w-elmo-skate">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m15')">条件</button></td></tr>
+<tr class="ok4"><td>モッピーのバルーン・トリップ<br><span class="badge-end">5/10営業終了</span></td><td class="wait-cell wt-load" id="w-moppy">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m16')">条件</button></td></tr>
+<tr class="ok4"><td>エルモのリトル・ドライブ<br><span class="badge-end">5/10営業終了</span></td><td class="wait-cell wt-load" id="w-elmo-drive">...</td><td><span class="mark-na">△</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m17')">条件</button></td></tr>
+<tr class="ng"><td>セサミのビッグ・ドライブ<br><span class="badge-stop">長期運休中</span></td><td class="wait-cell wt-closed">運休</td><td><span class="mark-na">―</span></td><td><span class="mark-ng">×</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m18')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ジュラシック ===== -->
+<div class="area-label">🦕 ジュラシック・パーク</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="ng"><td>ザ・フライング・ダイナソー</td><td class="wait-cell wt-load" id="w-flying-dino">...</td><td><span class="mark-na">―</span></td><td><span class="mark-ng">×</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m19')">条件</button></td></tr>
+<tr class="ng"><td>ジュラシック・パーク・ザ・ライド</td><td class="wait-cell wt-load" id="w-jurassic">...</td><td><span class="mark-na">―</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m20')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== アミティ ===== -->
+<div class="area-label">🦈 アミティ・ビレッジ</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="ok4"><td>ジョーズ</td><td class="wait-cell wt-load" id="w-jaws">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-cp">⚪︎</span></td><td><button class="btn-cond" onclick="openModal('m21')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ハリウッド ===== -->
+<div class="area-label">🎬 ハリウッド・エリア</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="ng"><td>スペース・ファンタジー・ザ・ライド<br><span class="badge-stop">期間限定ver.運行中</span></td><td class="wait-cell wt-load" id="w-space-fantasy">...</td><td><span class="mark-na">―</span></td><td><span class="mark-cp">⚪︎</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m22')">条件</button></td></tr>
+<tr class="ng"><td>ハリウッド・ドリーム・ザ・ライド</td><td class="wait-cell wt-load" id="w-hollywood">...</td><td><span class="mark-na">―</span></td><td><span class="mark-ng">×</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m23')">条件</button></td></tr>
+<tr class="ng"><td>ハリウッド・ドリーム・ザ・ライド〜バックドロップ〜</td><td class="wait-cell wt-load" id="w-backdrop">...</td><td><span class="mark-na">―</span></td><td><span class="mark-ng">×</span></td><td><span class="mark-ng">×</span></td><td><button class="btn-cond" onclick="openModal('m24')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ショー ===== -->
+<div class="area-label">🎭 ショー・アトラクション</div>
+<table>
+<thead><tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>乗車条件</th></tr></thead>
+<tbody>
+<tr class="show"><td>シング・オン・ツアー</td><td class="wait-cell wt-load" id="w-sing">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m25')">条件</button></td></tr>
+<tr class="show"><td>プレイング・ウィズおさるのジョージ</td><td class="wait-cell wt-load" id="w-george">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m26')">条件</button></td></tr>
+<tr class="show"><td>シュレック 4-D アドベンチャー<br><span class="badge-stop">休止中</span></td><td class="wait-cell wt-closed">休止</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m27')">条件</button></td></tr>
+<tr class="show"><td>セサミストリート 4-D ムービーマジック<br><span class="badge-stop">休止中</span></td><td class="wait-cell wt-closed">休止</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m28')">条件</button></td></tr>
+<tr class="show"><td>ユニバーサル・モンスター・ライブ・ロックンロール・ショー</td><td class="wait-cell wt-na">時間制</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m29')">条件</button></td></tr>
+<tr class="show"><td>名探偵コナン 4-D ライブ・ショー〜星空の宝石〜</td><td class="wait-cell wt-load" id="w-conan">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m30')">条件</button></td></tr>
+<tr class="show"><td>ウォーターワールド</td><td class="wait-cell wt-na">時間制</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m31')">条件</button></td></tr>
+<tr class="show"><td>ハローキティのリボン・コレクション</td><td class="wait-cell wt-load" id="w-kitty-ribbon">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m32')">条件</button></td></tr>
+<tr class="show"><td>呪術廻戦・ザ・リアル 4-D</td><td class="wait-cell wt-load" id="w-jujutsu">...</td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><span class="mark-ok">◎</span></td><td><button class="btn-cond" onclick="openModal('m33')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ========================================== -->
+<!-- PART 2: プレイランド・体験型 -->
+<!-- ========================================== -->
+<div class="section-title">🎪 Part 2：プレイランド・体験型アトラクション</div>
+
+<p class="note" style="margin-bottom:10px">身長制限なし・家族全員で楽しめるものがほとんどです。お子様が思いっきり遊べるスポットです。</p>
+
+<!-- ===== ニンテンドー体験 ===== -->
+<div class="area-label-play">🍄 スーパー・ニンテンドー・ワールド</div>
+<table class="play-table">
+<thead><tr><th>アトラクション</th><th>おすすめ</th><th>詳細</th></tr></thead>
+<tbody>
+<tr class="play"><td>パワーアップバンド・キーチャレンジ</td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p01')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ハリポタ体験 ===== -->
+<div class="area-label-play">⚡ ハリー・ポッターエリア</div>
+<table class="play-table">
+<thead><tr><th>アトラクション</th><th>おすすめ</th><th>詳細</th></tr></thead>
+<tbody>
+<tr class="play"><td>ワンド・マジック</td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p02')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ワンダーランド：スヌーピー ===== -->
+<div class="area-label-play">🐕 ワンダーランド：スヌーピー・スタジオ</div>
+<table class="play-table">
+<thead><tr><th>アトラクション</th><th>おすすめ</th><th>詳細</th></tr></thead>
+<tbody>
+<tr class="play"><td>スヌーピー・サウンド・ステージ・アドベンチャー</td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p03')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== ワンダーランド：セサミ ===== -->
+<div class="area-label-play">🍪 ワンダーランド：セサミストリート・ファン・ワールド<br><span style="font-size:10px;font-weight:normal">⚠️ 2026年5月10日で営業終了</span></div>
+<table class="play-table">
+<thead><tr><th>アトラクション</th><th>おすすめ</th><th>詳細</th></tr></thead>
+<tbody>
+<tr class="play"><td>アビーのマジカル・ツリー<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p04')">条件</button></td></tr>
+<tr class="play"><td>アビーのマジカル・パーティ<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p05')">条件</button></td></tr>
+<tr class="play"><td>ウォーター・ガーデン<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p06')">条件</button></td></tr>
+<tr class="play"><td>クッキーモンスター・スライド<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p07')">条件</button></td></tr>
+<tr class="play"><td>グローバーのコンストラクション・カンパニー<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p08')">条件</button></td></tr>
+<tr class="play"><td>ビッグバードのビッグ・ネスト<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p09')">条件</button></td></tr>
+<tr class="play"><td>バートとアーニーのワンダー・ザ・シー<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p10')">条件</button></td></tr>
+<tr class="play"><td>モッピーのラッキー・ダンス・パーティ<br><span class="badge-end">5/10終了</span></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p11')">条件</button></td></tr>
+<tr class="closed"><td>アーニーのラバーダッキー・レース<br><span class="badge-stop">長期運休中</span></td><td><span class="mark-na">― 運休中</span></td><td><button class="btn-cond-play" onclick="openModal('p12')">条件</button></td></tr>
+</tbody></table>
+
+<!-- ===== アミティ ===== -->
+<div class="area-label-play">🦈 アミティ・ビレッジ</div>
+<table class="play-table">
+<thead><tr><th>アトラクション</th><th>おすすめ</th><th>詳細</th></tr></thead>
+<tbody>
+<tr class="play"><td>カーニバル・ゲーム<br><small style="color:#666">（有料ゲーム）</small></td><td><span class="mark-ok">◎ 全員OK</span></td><td><button class="btn-cond-play" onclick="openModal('p13')">条件</button></td></tr>
+</tbody></table>
+
+<p class="note-warn">⚠️ セサミストリート・ファン・ワールドのアトラクション（エリア内全施設）は2026年5月10日（日）をもって営業終了です。お早めに！</p>
+<p class="note">※シュレック 4-D アドベンチャー、セサミストリート 4-D ムービーマジックは2026年1月8日〜当面の間休止中。</p>
+<p class="note">※スペース・ファンタジー・ザ・ライドは通常版が長期休止中（期間限定ver.で運行中の場合あり、身長制限は同じ）。</p>
+<p class="note">※待ち時間は Queue-Times.com API（Park ID:284）より取得。非公式データのため実際と異なる場合があります。</p>
+<p class="note">※情報はUSJ公式サイト（2026年4月時点参照）に基づきます。当日の運営状況により変更あり。</p>
+
+<!-- ========================================== -->
+<!-- モーダル群：ライド＆ショー（m01〜m33） -->
+<!-- ========================================== -->
+<div class="modal-overlay" id="m01"><div class="modal-box"><button class="modal-close" onclick="closeModal('m01')">×</button><h3>🏎️ マリオカート〜クッパの挑戦状〜</h3><p><span class="tag">定員</span>4名（2列×2席）</p><p><span class="tag">身長</span>107cm以上</p><p><span class="tag">同伴</span>107〜122cm未満は付き添い者必要</p><p><span class="tag">5歳 110cm</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳 92cm</span>→ × 身長不足</p><p><span class="tag">備考</span>ARゴーグル装着。暗所・大音量・ストロボ。チャイルドスイッチ対応。</p></div></div>
+
+<div class="modal-overlay" id="m02"><div class="modal-box"><button class="modal-close" onclick="closeModal('m02')">×</button><h3>🐢 ヨッシー・アドベンチャー</h3><p><span class="tag">定員</span>2名（1列×2席）</p><p><span class="tag">身長</span>92cm以上</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>屋外ゆったりライド。2人乗り→大人+子供の2組交代。</p></div></div>
+
+<div class="modal-overlay" id="m03"><div class="modal-box"><button class="modal-close" onclick="closeModal('m03')">×</button><h3>🦍 ドンキーコングのクレイジー・トロッコ</h3><p><span class="tag">定員</span>4名（2列×2席）</p><p><span class="tag">身長</span>107cm以上</p><p><span class="tag">同伴</span>107〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ × 身長不足</p><p><span class="tag">備考</span>ジェットコースター型。チャイルドスイッチ対応。</p></div></div>
+
+<div class="modal-overlay" id="m04"><div class="modal-box"><button class="modal-close" onclick="closeModal('m04')">×</button><h3>⚡ フォービドゥン・ジャーニー</h3><p><span class="tag">定員</span>4名</p><p><span class="tag">身長</span>122cm以上（同伴でも122cm必要）</p><p><span class="tag">5歳</span>→ × 身長不足</p><p><span class="tag">3歳</span>→ × 身長不足</p><p><span class="tag">備考</span>チャイルドスイッチ対応。キャッスルウォーク（城内見学）は全員OK。</p></div></div>
+
+<div class="modal-overlay" id="m05"><div class="modal-box"><button class="modal-close" onclick="closeModal('m05')">×</button><h3>🦅 フライト・オブ・ザ・ヒッポグリフ</h3><p><span class="tag">定員</span>16名（2名×8列）</p><p><span class="tag">身長</span>92cm以上195cm以下</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>屋外コースター。2名1列→大人+子供の2組。</p></div></div>
+
+<div class="modal-overlay" id="m06"><div class="modal-box"><button class="modal-close" onclick="closeModal('m06')">×</button><h3>🪄 オリバンダーの店</h3><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>ショー形式体験。杖に選ばれる体験。家族全員OK。</p></div></div>
+
+<div class="modal-overlay" id="m07"><div class="modal-box"><button class="modal-close" onclick="closeModal('m07')">×</button><h3>🔫 ミニオン・ハチャメチャ・ミッション</h3><p><span class="tag">身長制限</span>なし</p><p><span class="tag">同伴</span>122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">備考</span>ウォークスルー型シューティング。暗所・大音量・ストロボ。家族4人同時OK。</p></div></div>
+
+<div class="modal-overlay" id="m08"><div class="modal-box"><button class="modal-close" onclick="closeModal('m08')">×</button><h3>🍌 ミニオン・ハチャメチャ・ライド</h3><p><span class="tag">定員</span>8名（2列×4席）</p><p><span class="tag">身長</span>102cm以上</p><p><span class="tag">同伴</span>102〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ × 身長不足（102cm必要）</p><p><span class="tag">備考</span>シミュレーター型。チャイルドスイッチ対応。</p></div></div>
+
+<div class="modal-overlay" id="m09"><div class="modal-box"><button class="modal-close" onclick="closeModal('m09')">×</button><h3>🧊 ミニオン・ハチャメチャ・アイス</h3><p><span class="tag">定員</span>4名</p><p><span class="tag">身長</span>92cm以上</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>コーヒーカップ型。4人乗り→家族全員同時OK！</p></div></div>
+
+<div class="modal-overlay" id="m10"><div class="modal-box"><button class="modal-close" onclick="closeModal('m10')">×</button><h3>✈️ スヌーピーのフライング・エース</h3><p><span class="tag">定員</span>16名（2名×8列）</p><p><span class="tag">身長</span>92cm以上</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>室内コースター。2名1列→大人+子供の2組。2025年7月新登場。</p></div></div>
+
+<div class="modal-overlay" id="m11"><div class="modal-box"><button class="modal-close" onclick="closeModal('m11')">×</button><h3>🐕 フライング・スヌーピー</h3><p><span class="tag">定員</span>2名</p><p><span class="tag">身長</span>92cm以上</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>空中旋回ライド。2人乗り→大人+子供の2組。</p></div></div>
+
+<div class="modal-overlay" id="m12"><div class="modal-box"><button class="modal-close" onclick="closeModal('m12')">×</button><h3>🧁 ハローキティのカップケーキ・ドリーム</h3><p><span class="tag">定員</span>5名</p><p><span class="tag">身長制限</span>なし（1人で座れること）</p><p><span class="tag">同伴</span>122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">備考</span>コーヒーカップ型。定員5名→家族4人同時OK！</p></div></div>
+
+<div class="modal-overlay" id="m13"><div class="modal-box"><button class="modal-close" onclick="closeModal('m13')">×</button><h3>🐠 エルモのバブル・バブル</h3><p><span class="tag">定員</span>2名</p><p><span class="tag">身長</span>92cm以上</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>水上ゆったりライド。2人乗り→大人+子供の2組。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="m14"><div class="modal-box"><button class="modal-close" onclick="closeModal('m14')">×</button><h3>🎠 ビッグバードのビッグトップ・サーカス</h3><p><span class="tag">定員</span>71名</p><p><span class="tag">身長制限</span>なし（1人で座れること）</p><p><span class="tag">同伴</span>122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">備考</span>メリーゴーランド。家族4人同時OK！⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="m15"><div class="modal-box"><button class="modal-close" onclick="closeModal('m15')">×</button><h3>🛹 エルモのゴーゴー・スケートボード</h3><p><span class="tag">定員</span>32名</p><p><span class="tag">身長</span>92cm以上</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>大型振り子型。家族4人同時OK。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="m16"><div class="modal-box"><button class="modal-close" onclick="closeModal('m16')">×</button><h3>🎈 モッピーのバルーン・トリップ</h3><p><span class="tag">定員</span>4名</p><p><span class="tag">身長</span>92cm以上</p><p><span class="tag">同伴</span>92〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK（ギリギリ）</p><p><span class="tag">備考</span>気球型ゴンドラ。4人乗り→家族全員同時OK！⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="m17"><div class="modal-box"><button class="modal-close" onclick="closeModal('m17')">×</button><h3>🚗 エルモのリトル・ドライブ</h3><p><span class="tag">定員</span>1名</p><p><span class="tag">対象</span>3歳〜5歳</p><p><span class="tag">5歳</span>→ ◎ 1人で乗車OK</p><p><span class="tag">3歳</span>→ ◎ 1人で乗車OK</p><p><span class="tag">備考</span>子供専用ミニドライブ。大人乗車不可。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="m18"><div class="modal-box"><button class="modal-close" onclick="closeModal('m18')">×</button><h3>🚙 セサミのビッグ・ドライブ</h3><p><span class="tag">対象</span>6歳〜12歳</p><p><span class="tag">5歳</span>→ × 対象年齢外</p><p><span class="tag">3歳</span>→ × 対象年齢外</p><p><span class="tag">備考</span>2020年〜長期運休中。再開未定のまま5/10エリア終了予定。</p></div></div>
+
+<div class="modal-overlay" id="m19"><div class="modal-box"><button class="modal-close" onclick="closeModal('m19')">×</button><h3>🦖 ザ・フライング・ダイナソー</h3><p><span class="tag">定員</span>32名</p><p><span class="tag">身長</span>132cm以上198cm以下</p><p><span class="tag">5歳</span>→ × 身長不足</p><p><span class="tag">3歳</span>→ × 身長不足</p><p><span class="tag">備考</span>フライングコースター。チャイルドスイッチ対応。</p></div></div>
+
+<div class="modal-overlay" id="m20"><div class="modal-box"><button class="modal-close" onclick="closeModal('m20')">×</button><h3>🦕 ジュラシック・パーク・ザ・ライド</h3><p><span class="tag">定員</span>25名</p><p><span class="tag">身長</span>107cm以上</p><p><span class="tag">同伴</span>107〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ × 身長不足</p><p><span class="tag">備考</span>ボート型。25.9m急落下&水しぶき。チャイルドスイッチ対応。</p></div></div>
+
+<div class="modal-overlay" id="m21"><div class="modal-box"><button class="modal-close" onclick="closeModal('m21')">×</button><h3>🦈 ジョーズ</h3><p><span class="tag">定員</span>48名（6名×8列）</p><p><span class="tag">身長制限</span>なし（1人で座れること）</p><p><span class="tag">同伴</span>122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">備考</span>ボートツアー型。暗所・大音量・炎。1列6名→家族4人同じ列OK。</p></div></div>
+
+<div class="modal-overlay" id="m22"><div class="modal-box"><button class="modal-close" onclick="closeModal('m22')">×</button><h3>🚀 スペース・ファンタジー・ザ・ライド</h3><p><span class="tag">定員</span>8名</p><p><span class="tag">身長</span>102cm以上</p><p><span class="tag">同伴</span>102〜122cm未満は付き添い者必要</p><p><span class="tag">5歳</span>→ ⚪︎ 同伴OK</p><p><span class="tag">3歳</span>→ × 身長不足</p><p><span class="tag">備考</span>通常版は長期休止中。期間限定ver.で運行の場合あり（身長制限同じ）。</p></div></div>
+
+<div class="modal-overlay" id="m23"><div class="modal-box"><button class="modal-close" onclick="closeModal('m23')">×</button><h3>🎢 ハリウッド・ドリーム・ザ・ライド</h3><p><span class="tag">定員</span>36名</p><p><span class="tag">身長</span>132cm以上</p><p><span class="tag">5歳</span>→ × 身長不足</p><p><span class="tag">3歳</span>→ × 身長不足</p><p><span class="tag">備考</span>大型ジェットコースター。チャイルドスイッチ対応。</p></div></div>
+
+<div class="modal-overlay" id="m24"><div class="modal-box"><button class="modal-close" onclick="closeModal('m24')">×</button><h3>🎢 ハリウッド・ドリーム〜バックドロップ〜</h3><p><span class="tag">定員</span>36名</p><p><span class="tag">身長</span>132cm以上</p><p><span class="tag">5歳</span>→ × 身長不足</p><p><span class="tag">3歳</span>→ × 身長不足</p><p><span class="tag">備考</span>後ろ向きジェットコースター。チャイルドスイッチ対応。</p></div></div>
+
+<div class="modal-overlay" id="m25"><div class="modal-box"><button class="modal-close" onclick="closeModal('m25')">×</button><h3>🎤 シング・オン・ツアー</h3><p><span class="tag">定員</span>506名</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>映画「SING」のミュージカルショー。家族全員で楽しめます。</p></div></div>
+
+<div class="modal-overlay" id="m26"><div class="modal-box"><button class="modal-close" onclick="closeModal('m26')">×</button><h3>🐵 プレイング・ウィズおさるのジョージ</h3><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>参加型シアターショー。小さなお子様に大人気。</p></div></div>
+
+<div class="modal-overlay" id="m27"><div class="modal-box"><button class="modal-close" onclick="closeModal('m27')">×</button><h3>🟢 シュレック 4-D アドベンチャー</h3><p><span class="tag">定員</span>324名</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>4Dシアター。⚠️ 2026年1月8日〜当面の間休止中。</p></div></div>
+
+<div class="modal-overlay" id="m28"><div class="modal-box"><button class="modal-close" onclick="closeModal('m28')">×</button><h3>🍪 セサミストリート 4-D ムービーマジック</h3><p><span class="tag">定員</span>324名</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>4Dシアター。⚠️ 2026年1月8日〜当面の間休止中。</p></div></div>
+
+<div class="modal-overlay" id="m29"><div class="modal-box"><button class="modal-close" onclick="closeModal('m29')">×</button><h3>🎸 ユニバーサル・モンスター・ライブ・ロックンロール・ショー</h3><p><span class="tag">定員</span>902名</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>ライブ歌謡ショー。大人も楽しめるユーモアたっぷり。</p></div></div>
+
+<div class="modal-overlay" id="m30"><div class="modal-box"><button class="modal-close" onclick="closeModal('m30')">×</button><h3>🔍 名探偵コナン 4-D ライブ・ショー</h3><p><span class="tag">定員</span>750名</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>4Dライブシアター。期間限定の場合あり。</p></div></div>
+
+<div class="modal-overlay" id="m31"><div class="modal-box"><button class="modal-close" onclick="closeModal('m31')">×</button><h3>💦 ウォーターワールド</h3><p><span class="tag">定員</span>3,220名</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>屋外スタントショー。爆発・水しぶき・大音量あり。後方席がおすすめ。</p></div></div>
+
+<div class="modal-overlay" id="m32"><div class="modal-box"><button class="modal-close" onclick="closeModal('m32')">×</button><h3>🎀 ハローキティのリボン・コレクション</h3><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>キティちゃんとのグリーティング＆写真撮影。家族全員OK。</p></div></div>
+
+<div class="modal-overlay" id="m33"><div class="modal-box"><button class="modal-close" onclick="closeModal('m33')">×</button><h3>🔮 呪術廻戦・ザ・リアル 4-D</h3><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>4Dシアター型。期間限定イベント。家族全員OK。小さなお子様は暗所・大音量にご注意。</p></div></div>
+
+<!-- ========================================== -->
+<!-- モーダル群：プレイランド・体験型（p01〜p13） -->
+<!-- ========================================== -->
+<div class="modal-overlay" id="p01"><div class="modal-box"><button class="modal-close" onclick="closeModal('p01')">×</button><h3>🎮 パワーアップバンド・キーチャレンジ</h3><p><span class="tag">種類</span>ウォークスルー体験</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">必要</span>パワーアップバンド（3,200円/個）＋スマホアプリ</p><p><span class="tag">備考</span>エリア内を歩いてハテナブロックを叩いたり敵を倒す。3つのカギを集めてクッパJr.とボスバトル。家族全員で楽しめるが、バンドは人数分必要。</p></div></div>
+
+<div class="modal-overlay" id="p02"><div class="modal-box"><button class="modal-close" onclick="closeModal('p02')">×</button><h3>🪄 ワンド・マジック</h3><p><span class="tag">種類</span>体験型</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">必要</span>マジカル・ワンド（杖・有料）</p><p><span class="tag">備考</span>ホグズミード村の8か所で呪文を唱えて魔法体験。家族で楽しめるがお子様には少し難しいかも。杖はオリバンダーの店で購入。</p></div></div>
+
+<div class="modal-overlay" id="p03"><div class="modal-box"><button class="modal-close" onclick="closeModal('p03')">×</button><h3>🐕 スヌーピー・サウンド・ステージ・アドベンチャー</h3><p><span class="tag">種類</span>屋内プレイランド</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>スヌーピーの映画スタジオをテーマにした屋内遊び場。2025年7月にリニューアル。雨の日にもおすすめ。家族全員OK。</p></div></div>
+
+<div class="modal-overlay" id="p04"><div class="modal-box"><button class="modal-close" onclick="closeModal('p04')">×</button><h3>🌳 アビーのマジカル・ツリー</h3><p><span class="tag">種類</span>ジャングルジム型プレイランド</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>大きな木の中に広がるジャングルジム。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p05"><div class="modal-box"><button class="modal-close" onclick="closeModal('p05')">×</button><h3>⭐ アビーのマジカル・パーティ</h3><p><span class="tag">種類</span>屋内プレイランド</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>星形ブロックやボールで遊べる。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p06"><div class="modal-box"><button class="modal-close" onclick="closeModal('p06')">×</button><h3>💧 ウォーター・ガーデン</h3><p><span class="tag">種類</span>水遊び場</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>噴水や滝の水遊びエリア。着替え必須！⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p07"><div class="modal-box"><button class="modal-close" onclick="closeModal('p07')">×</button><h3>🍪 クッキーモンスター・スライド</h3><p><span class="tag">種類</span>すべり台</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>ベロ型すべり台！⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p08"><div class="modal-box"><button class="modal-close" onclick="closeModal('p08')">×</button><h3>🔧 グローバーのコンストラクション・カンパニー</h3><p><span class="tag">種類</span>ブロック遊びプレイランド</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>大きなやわらかいブロックで自由に組み立て。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p09"><div class="modal-box"><button class="modal-close" onclick="closeModal('p09')">×</button><h3>🪺 ビッグバードのビッグ・ネスト</h3><p><span class="tag">種類</span>ジャングルジム型プレイランド</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>巨大ジャングルジム＋トンネル探検。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p10"><div class="modal-box"><button class="modal-close" onclick="closeModal('p10')">×</button><h3>🌊 バートとアーニーのワンダー・ザ・シー</h3><p><span class="tag">種類</span>ボールプール型プレイランド</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>すべり台の先にボールの海！⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p11"><div class="modal-box"><button class="modal-close" onclick="closeModal('p11')">×</button><h3>🎵 モッピーのラッキー・ダンス・パーティ</h3><p><span class="tag">種類</span>音楽プレイランド</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>DJの音楽に合わせてダンス。⚠️ 2026年5月10日営業終了。</p></div></div>
+
+<div class="modal-overlay" id="p12"><div class="modal-box"><button class="modal-close" onclick="closeModal('p12')">×</button><h3>🦆 アーニーのラバーダッキー・レース</h3><p><span class="tag">種類</span>川下りレース</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">備考</span>⚠️ 2020年〜長期運休中。5/10エリア終了。</p></div></div>
+
+<div class="modal-overlay" id="p13"><div class="modal-box"><button class="modal-close" onclick="closeModal('p13')">×</button><h3>🎯 カーニバル・ゲーム</h3><p><span class="tag">種類</span>ゲーム（有料）</p><p><span class="tag">身長制限</span>なし</p><p><span class="tag">場所</span>アミティ・ビレッジ</p><p><span class="tag">備考</span>ボール投げなどのカーニバルゲーム。別途料金が必要。</p></div></div>
+
+<!-- ========================================== -->
+<!-- JavaScript -->
+<!-- ========================================== -->
+<script>
+// === モーダル制御 ===
+function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
+document.querySelectorAll('.modal-overlay').forEach(function(el){el.addEventListener('click',function(e){if(e.target===el){el.classList.remove('show');document.body.style.overflow=''}})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.show').forEach(function(el){el.classList.remove('show');document.body.style.overflow=''})}});
+
+// === リアルタイム待ち時間 ===
+// 正しいUSJ Park ID: 284
+var API_URL = 'https://queue-times.com/parks/284/queue_times.json';
+
+// API ride id → HTML element id（実データに基づく正確なマッピング）
+var ID_MAP = {
+  12061: 'w-mario-kart',       // Mario Kart: Koopa's Challenge
+  12071: 'w-yoshi',            // Yoshi's Adventure
+  14402: 'w-donkey',           // Mine Cart Madness (ドンキーコング)
+  12065: 'w-forbidden',        // Harry Potter and the Forbidden Journey
+  12073: 'w-hippogriff',       // Flight of the Hippogriff
+  12197: 'w-ollivanders',      // Ollivanders
+  14918: 'w-minion-mission',   // ミニオン・ハチャメチャ・ミッション
+  12066: 'w-minion-ride',      // Despicable Me Minion Mayhem
+  12072: 'w-freeze-ray',       // Freeze Ray Sliders (ハチャメチャ・アイス)
+  14919: 'w-snoopy-ace',       // スヌーピーのフライング・エース・アドベンチャー
+  12075: 'w-flying-snoopy',    // The Flying Snoopy
+  7065:  'w-kitty-cup',        // Hello Kitty's Cupcake Dream
+  7098:  'w-elmo-bubble',      // Elmo's Bubble Bubble
+  7061:  'w-big-bird',         // Big Bird's Big Top Circus
+  7067:  'w-elmo-skate',       // Elmo's Go-Go Skateboard
+  7075:  'w-moppy',            // Moppy's Balloon Trip
+  7071:  'w-elmo-drive',       // Elmo's Little Drive
+  7092:  'w-flying-dino',      // The Flying Dinosaur
+  12067: 'w-jurassic',         // Jurassic Park - The Ride
+  12068: 'w-jaws',             // JAWS
+  12082: 'w-space-fantasy',    // Space Fantasy - The Ride（通常版・休止中）
+  15428: 'w-space-fantasy',    // スペース・ファンタジー～CLUB ZEDD REMIX～
+  7077:  'w-hollywood',        // Hollywood Dream - The Ride
+  12070: 'w-backdrop',         // Hollywood Dream - Backdrop
+  7214:  'w-sing',             // SING ON TOUR
+  12091: 'w-george',           // Playing with Curious George
+  13005: 'w-conan',            // Detective Conan: The World
+  7063:  'w-kitty-ribbon',     // Hello Kitty's Ribbon Collection
+  15427: 'w-jujutsu'           // 呪術廻戦・ザ・リアル 4-D
+};
+
+function setWait(elId, mins, isOpen) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  // クラスをリセット
+  el.className = 'wait-cell';
+  if (!isOpen) {
+    el.textContent = '運休';
+    el.classList.add('wt-closed');
+  } else if (mins <= 30) {
+    el.textContent = mins + '分';
+    el.classList.add('wt-green');
+  } else if (mins <= 60) {
+    el.textContent = mins + '分';
+    el.classList.add('wt-yellow');
+  } else {
+    el.textContent = mins + '分';
+    el.classList.add('wt-red');
+  }
+}
+
+function fetchWaitTimes() {
+  fetch(API_URL)
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function(data) {
+      var matched = {};
+      // rides配列を処理（USJ 284はlands空、rides直下）
+      var allRides = data.rides || [];
+      // lands配下にもある場合
+      if (data.lands) {
+        data.lands.forEach(function(land) {
+          if (land.rides) allRides = allRides.concat(land.rides);
+        });
+      }
+      allRides.forEach(function(ride) {
+        var elId = ID_MAP[ride.id];
+        if (elId && !matched[elId]) {
+          setWait(elId, ride.wait_time, ride.is_open);
+          matched[elId] = true;
+        }
+      });
+      // マッチしなかったローディングセルを処理
+      document.querySelectorAll('.wt-load').forEach(function(el) {
+        if (!matched[el.id]) {
+          el.textContent = '-';
+          el.className = 'wait-cell wt-na';
+        }
+      });
+      // 更新時刻
+      var now = new Date();
+      document.getElementById('lastUpdate').textContent =
+        ('0'+now.getHours()).slice(-2) + ':' + ('0'+now.getMinutes()).slice(-2);
+    })
+    .catch(function(e) {
+      console.error('待ち時間取得エラー:', e);
+      document.getElementById('lastUpdate').textContent = '取得失敗';
+      document.querySelectorAll('.wt-load').forEach(function(el) {
+        el.textContent = '?';
+        el.className = 'wait-cell wt-na';
+      });
+    });
+}
+
+// 初回取得
+fetchWaitTimes();
+// 5分毎に自動更新
+setInterval(fetchWaitTimes, 5 * 60 * 1000);
+</script>
+
+</body>
+</html>
