@@ -10,20 +10,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;bac
 h1{text-align:center;font-size:18px;margin:10px 0;color:#ffd700}
 .family-info{background:#2d2d44;border-radius:8px;padding:10px;margin:10px 0;font-size:12px;line-height:1.6}
 .family-info span{display:inline-block;background:#3d3d5c;border-radius:4px;padding:2px 6px;margin:2px}
-.area{margin:16px 0 8px;padding:8px 12px;border-radius:6px;font-size:15px;font-weight:bold}
+.area{margin:16px 0 0;padding:8px 12px;border-radius:6px 6px 0 0;font-size:15px;font-weight:bold}
 .area-nintendo{background:#e60012;color:#fff}
-.area-harry{background:#1a1a4e;color:#d4af37;border:1px solid #d4af37}
+.area-harry{background:#1a1a4e;color:#d4af37;border:1px solid #d4af37;border-bottom:none}
 .area-minion{background:#ffd700;color:#333}
 .area-wonder{background:#ff69b4;color:#fff}
 .area-jurassic{background:#228b22;color:#fff}
 .area-amity{background:#4682b4;color:#fff}
-.area-hollywood{background:#333;color:#ffd700;border:1px solid #ffd700}
-table{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:11px}
-th{background:#2d2d44;padding:6px 3px;text-align:center;position:sticky;top:0;z-index:2;font-size:10px}
-td{padding:6px 3px;text-align:center;border-bottom:1px solid #333;vertical-align:middle}
+.area-hollywood{background:#333;color:#ffd700;border:1px solid #ffd700;border-bottom:none}
+table{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:11px;table-layout:fixed}
+col.c-name{width:42%}
+col.c-wait{width:16%}
+col.c-rec{width:14%}
+col.c-5y{width:9%}
+col.c-3y{width:9%}
+col.c-cond{width:10%}
+th{background:#2d2d44;padding:6px 3px;text-align:center;position:sticky;top:0;z-index:2;font-size:10px;overflow:hidden}
+td{padding:6px 3px;text-align:center;border-bottom:1px solid #333;vertical-align:middle;overflow:hidden}
 tr:nth-child(even){background:#1f1f35}
-.attr-name{text-align:left;font-size:11px;font-weight:bold;min-width:90px}
-.wait-cell{font-weight:bold;font-size:14px;cursor:pointer;border-radius:4px;min-width:44px;padding:8px 4px;-webkit-tap-highlight-color:rgba(255,215,0,0.3)}
+.attr-name{text-align:left;font-size:11px;font-weight:bold}
+.wait-cell{font-weight:bold;font-size:14px;cursor:pointer;border-radius:4px;-webkit-tap-highlight-color:rgba(255,215,0,0.3)}
 .wait-cell:active{background:rgba(255,215,0,0.2)}
 .wg{color:#00ff88}
 .wy{color:#ffdd00}
@@ -73,7 +79,7 @@ tr:nth-child(even){background:#1f1f35}
 
 <!-- ===== スーパー・ニンテンドー・ワールド ===== -->
 <div class="area area-nintendo">🍄 スーパー・ニンテンドー・ワールド</div>
-<table>
+<table><colgroup><col class="c-name"><col class="c-wait"><col class="c-rec"><col class="c-5y"><col class="c-3y"><col class="c-cond"></colgroup>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
 <tr><td class="attr-name">マリオカート<br>～クッパの挑戦状～</td><td class="wait-cell" id="w-mario-kart"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m01')">詳細</button></td></tr>
 <tr><td class="attr-name">ヨッシー・アドベンチャー</td><td class="wait-cell" id="w-yoshi"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟢</td><td>🟢</td><td><button class="cond-btn" onclick="openModal('m02')">詳細</button></td></tr>
@@ -82,7 +88,7 @@ tr:nth-child(even){background:#1f1f35}
 
 <!-- ===== ハリー・ポッター ===== -->
 <div class="area area-harry">⚡ ウィザーディング・ワールド</div>
-<table>
+<table><colgroup><col class="c-name"><col class="c-wait"><col class="c-rec"><col class="c-5y"><col class="c-3y"><col class="c-cond"></colgroup>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
 <tr><td class="attr-name">フォービドゥン・ジャーニー</td><td class="wait-cell" id="w-forbidden"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m04')">詳細</button></td></tr>
 <tr><td class="attr-name">フライト・オブ・ザ・<br>ヒッポグリフ</td><td class="wait-cell" id="w-hippo"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m05')">詳細</button></td></tr>
@@ -91,7 +97,7 @@ tr:nth-child(even){background:#1f1f35}
 
 <!-- ===== ミニオン・パーク ===== -->
 <div class="area area-minion">🍌 ミニオン・パーク</div>
-<table>
+<table><colgroup><col class="c-name"><col class="c-wait"><col class="c-rec"><col class="c-5y"><col class="c-3y"><col class="c-cond"></colgroup>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
 <tr><td class="attr-name">ミニオン・ハチャメチャ・ライド</td><td class="wait-cell" id="w-minion-ride"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m07')">詳細</button></td></tr>
 <tr><td class="attr-name">ミニオン・ハチャメチャ・<br>ミッション</td><td class="wait-cell" id="w-minion-mission"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m08')">詳細</button></td></tr>
@@ -100,7 +106,7 @@ tr:nth-child(even){background:#1f1f35}
 
 <!-- ===== ワンダーランド ===== -->
 <div class="area area-wonder">🎀 ユニバーサル・ワンダーランド</div>
-<table>
+<table><colgroup><col class="c-name"><col class="c-wait"><col class="c-rec"><col class="c-5y"><col class="c-3y"><col class="c-cond"></colgroup>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
 <tr><td class="attr-name">エルモのバブル・バブル</td><td class="wait-cell" id="w-elmo-bubble"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m10')">詳細</button></td></tr>
 <tr><td class="attr-name">エルモのゴーゴー・<br>スケートボード</td><td class="wait-cell" id="w-elmo-skate"><span class="loading-dot">…</span></td><td class="ok2">○</td><td>🟢</td><td>🟡</td><td><button class="cond-btn" onclick="openModal('m11')">詳細</button></td></tr>
@@ -115,7 +121,7 @@ tr:nth-child(even){background:#1f1f35}
 
 <!-- ===== ジュラシック・パーク ===== -->
 <div class="area area-jurassic">🦕 ジュラシック・パーク</div>
-<table>
+<table><colgroup><col class="c-name"><col class="c-wait"><col class="c-rec"><col class="c-5y"><col class="c-3y"><col class="c-cond"></colgroup>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
 <tr><td class="attr-name">ジュラシックパーク・ザ・ライド</td><td class="wait-cell" id="w-jurassic"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m19')">詳細</button></td></tr>
 <tr><td class="attr-name">ザ・フライング・ダイナソー</td><td class="wait-cell" id="w-flying-dino"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m20')">詳細</button></td></tr>
@@ -123,14 +129,14 @@ tr:nth-child(even){background:#1f1f35}
 
 <!-- ===== アミティ・ビレッジ ===== -->
 <div class="area area-amity">🦈 アミティ・ビレッジ</div>
-<table>
+<table><colgroup><col class="c-name"><col class="c-wait"><col class="c-rec"><col class="c-5y"><col class="c-3y"><col class="c-cond"></colgroup>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
 <tr><td class="attr-name">ジョーズ</td><td class="wait-cell" id="w-jaws"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🟡</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m21')">詳細</button></td></tr>
 </table>
 
 <!-- ===== ハリウッド・エリア ===== -->
 <div class="area area-hollywood">🎬 ハリウッド・エリア</div>
-<table>
+<table><colgroup><col class="c-name"><col class="c-wait"><col class="c-rec"><col class="c-5y"><col class="c-3y"><col class="c-cond"></colgroup>
 <tr><th>アトラクション</th><th>待ち</th><th>おすすめ</th><th>5歳</th><th>3歳</th><th>条件</th></tr>
 <tr><td class="attr-name">ハリウッド・ドリーム<br>・ザ・ライド</td><td class="wait-cell" id="w-hollywood"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m22')">詳細</button></td></tr>
 <tr><td class="attr-name">ハリウッド・ドリーム<br>～バックドロップ～</td><td class="wait-cell" id="w-backdrop"><span class="loading-dot">…</span></td><td class="ok4">◎</td><td>🔴</td><td>🔴</td><td><button class="cond-btn" onclick="openModal('m23')">詳細</button></td></tr>
@@ -184,148 +190,61 @@ var ID_MAP={12061:"w-mario-kart",12071:"w-yoshi",14402:"w-donkey",12065:"w-forbi
 
 var LINK_MAP={"w-mario-kart":28684,"w-yoshi":28685,"w-donkey":28708,"w-forbidden":30,"w-hippo":29,"w-ollivander":28695,"w-minion-ride":71,"w-minion-mission":28711,"w-freeze-ray":82,"w-elmo-bubble":68,"w-elmo-skate":44,"w-elmo-drive":67,"w-moppy":45,"w-bigbird":66,"w-flying-snoopy":10,"w-snoopy-ace":28712,"w-kitty-cup":11,"w-kitty-ribbon":28694,"w-jurassic":2,"w-flying-dino":58,"w-jaws":1,"w-hollywood":8,"w-backdrop":13,"w-space-fantasy":28722,"w-sing":88,"w-george":81,"w-jujutsu":28721,"w-conan":28703};
 
-function getJSTStr(){
-  var now=new Date();
-  var h=(now.getUTCHours()+9)%24;
-  var m=now.getUTCMinutes();
-  return (h<10?"0":"")+h+":"+(m<10?"0":"")+m;
-}
+function getJSTStr(){var n=new Date(),h=(n.getUTCHours()+9)%24,m=n.getUTCMinutes();return(h<10?"0":"")+h+":"+(m<10?"0":"")+m;}
 
-/* ===== 閉園自動判定 =====
-   営業中 → 待ち時間はバラバラ（5,20,40,90,140...）
-   閉園中 → APIが固定値を返す（全部10, 全部5, 全部0 など）
-   判定条件:
-   1. openなライドが0 → 閉園
-   2. openなライドの待ち時間が全て同一 → 閉園
-   3. openなライドの待ち時間の種類が2以下かつ最大15分以下 → 閉園
-   4. openなライドの80%以上が同じ値 → 閉園
-*/
 function detectParkClosed(rides){
-  var waits=[];
-  for(var i=0;i<rides.length;i++){
-    if(rides[i].o) waits.push(rides[i].w);
-  }
-  // 条件1: openなライドが0
-  if(waits.length===0) return true;
-
-  // 待ち時間の出現回数を集計
-  var freq={};
-  var maxVal=0;
-  for(var i=0;i<waits.length;i++){
-    var v=waits[i];
-    freq[v]=(freq[v]||0)+1;
-    if(v>maxVal) maxVal=v;
-  }
-  var kinds=Object.keys(freq).length;
-
-  // 条件2: 全て同一値
-  if(kinds===1) return true;
-
-  // 条件3: 2種類以下かつ最大15分以下
-  if(kinds<=2 && maxVal<=15) return true;
-
-  // 条件4: 最頻値が80%以上を占める かつ 最大値が20以下
-  var topFreq=0;
-  for(var k in freq){ if(freq[k]>topFreq) topFreq=freq[k]; }
-  if(topFreq/waits.length>=0.8 && maxVal<=20) return true;
-
+  var w=[];
+  for(var i=0;i<rides.length;i++){if(rides[i].o)w.push(rides[i].w);}
+  if(w.length===0)return true;
+  var f={},mx=0;
+  for(var i=0;i<w.length;i++){f[w[i]]=(f[w[i]]||0)+1;if(w[i]>mx)mx=w[i];}
+  var k=Object.keys(f).length;
+  if(k===1)return true;
+  if(k<=2&&mx<=15)return true;
+  var tf=0;for(var v in f){if(f[v]>tf)tf=f[v];}
+  if(tf/w.length>=0.8&&mx<=20)return true;
   return false;
 }
 
-function goLink(cellId){
-  var aid=LINK_MAP[cellId];
-  if(aid) location.href="https://usjinfo.com/wait/sp/attrWait.php?attr_id="+aid;
-}
+function goLink(c){var a=LINK_MAP[c];if(a)location.href="https://usjinfo.com/wait/sp/attrWait.php?attr_id="+a;}
 
 function applyRides(rides,label,isLive){
   var closed=isLive?detectParkClosed(rides):false;
-  var banner=document.getElementById("closed-banner");
-
-  if(banner){
-    if(isLive&&closed){
-      banner.style.display="block";
-      banner.textContent="🌙 現在パークは閉園中です（"+getJSTStr()+" 確認）";
-    }else{
-      banner.style.display="none";
-    }
-  }
-
+  var bn=document.getElementById("closed-banner");
+  if(bn){if(isLive&&closed){bn.style.display="block";bn.textContent="🌙 現在パークは閉園中です（"+getJSTStr()+" 確認）";}else{bn.style.display="none";}}
   for(var i=0;i<rides.length;i++){
-    var r=rides[i];
-    var cid=ID_MAP[r.id];
-    if(!cid)continue;
-    var cell=document.getElementById(cid);
-    if(!cell)continue;
-
-    if(!isLive){
-      cell.innerHTML='<span class="loading-dot">…</span>';
-      cell.className="wait-cell";
-    }else if(closed){
-      cell.innerHTML='<span style="color:#666;font-size:9px">閉園中</span>';
-      cell.className="wait-cell wc";
-    }else if(!r.o){
-      cell.innerHTML='<span style="color:#999">運休</span>';
-      cell.className="wait-cell wc";
-    }else if(r.w===0){
-      cell.innerHTML='<span style="color:#888;font-size:10px">情報なし</span>';
-      cell.className="wait-cell wc";
-    }else{
-      var cls="wg";
-      if(r.w>60)cls="wr";else if(r.w>30)cls="wy";
-      cell.innerHTML='<span>'+r.w+'分</span>';
-      cell.className="wait-cell "+cls;
-    }
+    var r=rides[i],cid=ID_MAP[r.id];if(!cid)continue;
+    var cell=document.getElementById(cid);if(!cell)continue;
+    if(!isLive){cell.innerHTML='<span class="loading-dot">…</span>';cell.className="wait-cell";}
+    else if(closed){cell.innerHTML='<span style="color:#666;font-size:9px">閉園中</span>';cell.className="wait-cell wc";}
+    else if(!r.o){cell.innerHTML='<span style="color:#999">運休</span>';cell.className="wait-cell wc";}
+    else if(r.w===0){cell.innerHTML='<span style="color:#888;font-size:10px">情報なし</span>';cell.className="wait-cell wc";}
+    else{var cls="wg";if(r.w>60)cls="wr";else if(r.w>30)cls="wy";cell.innerHTML='<span>'+r.w+'分</span>';cell.className="wait-cell "+cls;}
     (function(id){cell.onclick=function(){goLink(id);};})(cid);
   }
-
-  var lbl=document.getElementById("update-label");
-  if(!lbl)return;
-  if(!isLive) lbl.textContent=label;
-  else if(closed) lbl.textContent="🌙 閉園中（"+getJSTStr()+" 確認）";
+  var lbl=document.getElementById("update-label");if(!lbl)return;
+  if(!isLive)lbl.textContent=label;
+  else if(closed)lbl.textContent="🌙 閉園中（"+getJSTStr()+" 確認）";
   else lbl.textContent=label;
 }
 
 function fetchLive(){
-  var lbl=document.getElementById("update-label");
-  if(lbl)lbl.textContent="⏳ 取得中...";
-  var urls=[
-    "https://queue-times.com/parks/284/queue_times.json",
-    "https://api.allorigins.win/raw?url="+encodeURIComponent("https://queue-times.com/parks/284/queue_times.json"),
-    "https://corsproxy.io/?"+encodeURIComponent("https://queue-times.com/parks/284/queue_times.json")
-  ];
+  var lbl=document.getElementById("update-label");if(lbl)lbl.textContent="⏳ 取得中...";
+  var urls=["https://queue-times.com/parks/284/queue_times.json","https://api.allorigins.win/raw?url="+encodeURIComponent("https://queue-times.com/parks/284/queue_times.json"),"https://corsproxy.io/?"+encodeURIComponent("https://queue-times.com/parks/284/queue_times.json")];
   var tried=0;
   function tryNext(){
-    if(tried>=urls.length){
-      if(lbl)lbl.textContent="⚠ 取得失敗（更新ボタンで再試行）";
-      return;
-    }
+    if(tried>=urls.length){if(lbl)lbl.textContent="⚠ 取得失敗（更新ボタンで再試行）";return;}
     var url=urls[tried];tried++;
-    var xhr=new XMLHttpRequest();
-    xhr.open("GET",url,true);
-    xhr.timeout=8000;
+    var xhr=new XMLHttpRequest();xhr.open("GET",url,true);xhr.timeout=8000;
     xhr.onload=function(){
-      if(xhr.status===200){
-        try{
-          var j=JSON.parse(xhr.responseText);
-          var ar=[];
-          if(j.lands&&j.lands.length>0){
-            for(var l=0;l<j.lands.length;l++){
-              var rs=j.lands[l].rides;
-              if(rs)for(var k=0;k<rs.length;k++)ar.push({id:rs[k].id,w:rs[k].wait_time,o:rs[k].is_open});
-            }
-          }
-          if(j.rides&&j.rides.length>0){
-            for(var k=0;k<j.rides.length;k++)ar.push({id:j.rides[k].id,w:j.rides[k].wait_time,o:j.rides[k].is_open});
-          }
-          if(ar.length>0){
-            applyRides(ar,"✅ LIVE "+getJSTStr()+" 更新",true);
-          }else{tryNext();}
-        }catch(e){tryNext();}
-      }else{tryNext();}
+      if(xhr.status===200){try{
+        var j=JSON.parse(xhr.responseText),ar=[];
+        if(j.lands&&j.lands.length>0){for(var l=0;l<j.lands.length;l++){var rs=j.lands[l].rides;if(rs)for(var k=0;k<rs.length;k++)ar.push({id:rs[k].id,w:rs[k].wait_time,o:rs[k].is_open});}}
+        if(j.rides&&j.rides.length>0){for(var k=0;k<j.rides.length;k++)ar.push({id:j.rides[k].id,w:j.rides[k].wait_time,o:j.rides[k].is_open});}
+        if(ar.length>0){applyRides(ar,"✅ LIVE "+getJSTStr()+" 更新",true);}else{tryNext();}
+      }catch(e){tryNext();}}else{tryNext();}
     };
-    xhr.onerror=function(){tryNext();};
-    xhr.ontimeout=function(){tryNext();};
-    xhr.send();
+    xhr.onerror=function(){tryNext();};xhr.ontimeout=function(){tryNext();};xhr.send();
   }
   tryNext();
 }
@@ -333,7 +252,6 @@ function fetchLive(){
 function openModal(id){var e=document.getElementById(id);if(e)e.classList.add("active");}
 function closeModal(id){var e=document.getElementById(id);if(e)e.classList.remove("active");}
 
-// 起動
 setTimeout(fetchLive,300);
 setInterval(fetchLive,300000);
 </script>
